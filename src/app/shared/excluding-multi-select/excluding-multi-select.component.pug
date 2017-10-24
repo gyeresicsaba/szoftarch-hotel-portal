@@ -1,0 +1,15 @@
+//
+   Created by csoma on 2017. 04. 11..
+
+div.multiselect-container.form-control((click)="isOpen = true")
+  div.selected-items(*ngIf="!showCounterOnly")
+    span(*ngFor="let selectedItem of selectedItems; let isLast = last;") {{ selectedItem }}
+      span(*ngIf="!isLast") ,&nbsp;
+  span(*ngIf="showCounterOnly") {{ selectedItems.length }} kiválasztva
+  i.fa([ngClass]="{'fa-caret-down': !isOpen, 'fa-caret-up': isOpen}", (click)="caretClick($event)")
+  div.multiselect-dropdown(*ngIf = "isOpen")
+    div(*ngFor="let item of items", (click)="toggleSelect(item)") {{ item }}
+      i.fa.fa-check([ngClass]="{'selected': selectedItems && selectedItems.indexOf(item) > -1}")
+    hr
+    div(*ngFor="let item of exclusiveItems", (click)="exclusiveSelected(item)") {{ item }}
+      i.fa.fa-check.circle([ngClass]="{'selected': selectedItems && selectedItems.indexOf(item) > -1}")

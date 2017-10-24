@@ -1,0 +1,59 @@
+div.panel-body
+  form.form-horizontal(role="form", #detailsForm="ngForm", (ngSubmit)="onSubmit()")
+    div.form-group
+      div.row.col-xs-12
+        div([ngClass]="{'has-error': box.box_number?.length < 2}")
+          label.col-xs-2.control-label(for="number") Dobozszám:
+          div.col-xs-2
+            div.input-group
+              div.input-group-addon {{ box.box_number[0] }}
+              input#number.form-control(type="text", placeholder="Dobozszám", name="number", [(ngModel)]="tempBoxNumber", (ngModelChange)="boxNumberChange($event)", #box_number="ngModel", required)
+        div([ngClass]="{'has-error': !box.partner_number}")
+          label.col-xs-2.control-label Tenyészet:
+          div.col-xs-3
+            app-typeahead(*ngIf="isNew", [items]="response.data", [resetSubject]="resetSubject", (selectedChange)="select($event)", (searchChanged)="getPartners($event)")
+            h3
+              strong(*ngIf="!isNew") {{ box.partner_name }} ({{ box.partner_number }})
+        div.col-xs-3.text-right
+          div.i-checks([ngClass]="{'checked': box.postage}")
+            label
+              input(type="checkbox", name="postage", [(ngModel)]="box.postage", #postage="ngModel")
+              | Postaköltség
+    hr
+    div.form-group
+      div.col-xs-6
+        div.row([ngClass]="{'has-error': !box.out}")
+          label.col-xs-4.control-label(for="leaving-date") Kiküldési dátum:
+          div.col-xs-6
+            my-date-picker#leaving-date.mydatepicker([options]="startDatePickerOptions", (dateChanged)="pickerStartDateChange($event)", [selDate]="leaveDateModel.date", [locale]="'hu'")
+      label.col-xs-2.control-label(for="arrival-date") Beérkezési dátum:
+      div.col-xs-3
+        my-date-picker#arrival-date.mydatepicker([options]="endDatePickerOptions", (dateChanged)="pickerEndDateChange($event)", [selDate]="arrivalDateModel.date", [locale]="'hu'")
+    div.form-group
+      div.col-xs-6
+        div.row([ngClass]="{'has-error': !box.pipe_out}")
+          label.col-xs-4.control-label(for="pipe_out") Cső ki:
+          div.col-xs-6
+            input#pipe_out.form-control(type="text", placeholder="Cső ki", name="pipe_out", [(ngModel)]="box.pipe_out", #pipe_out="ngModel", required)
+      label.col-xs-2.control-label(for="pipe_in") Cső be:
+      div.col-xs-3
+        input#pipe_in.form-control(type="text", placeholder="Cső be", name="pipe_in", [(ngModel)]="box.pipe_in", #pipe_in="ngModel")
+    div.form-group
+      div.col-xs-6
+        div.row([ngClass]="{'has-error': !box.battery_out}")
+          label.col-xs-4.control-label(for="battery_out") Akku ki:
+          div.col-xs-6
+            input#battery_out.form-control(type="text", placeholder="Akku ki", name="battery_out", [(ngModel)]="box.battery_out", #battery_out="ngModel", required)
+      label.col-xs-2.control-label(for="battery_in") Akku be:
+      div.col-xs-3
+        input#battery_in.form-control(type="text", placeholder="Akku be", name="battery_in", [(ngModel)]="box.battery_in", #battery_in="ngModel")
+    hr
+    div.form-group
+      label.col-xs-2.control-label(for="comment") Megjegyzés:
+      div.col-xs-6
+        textarea#comment.form-control(name="comment", [(ngModel)]="box.comment", #comment="ngModel")
+    div.col-lg-12.text-right(*ngIf="isNew")
+      button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Mentés
+    div.col-lg-12.text-right(*ngIf="!isNew")
+      button.btn(type="button", [routerLink]="'/box/list'") Mégsem
+      button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Módosít

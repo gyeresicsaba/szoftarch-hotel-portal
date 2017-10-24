@@ -1,0 +1,9 @@
+//
+   Created by csoma on 2017. 03. 31..
+
+div.selected-value((click)="selected = !disabled && !selected", [class.disabled]="disabled")
+  span.item {{ (selectedModel ? selectedModel[selectedDisplayAttribute] : placeholder) || '' }}
+  span.fa.fa-caret-down
+ul#typeahead.typeahead.dropdown-menu(role="listbox", *ngIf="selected")
+  li.typehead-elem(*ngFor="let item of items", [ngClass]="{'active': item.active}", (click)="selectItem(item)")
+    a.dropdown-item {{ getListItemDisplayValue(item) }}

@@ -1,0 +1,26 @@
+nav {
+  li {
+    transition: border 0.3s;
+    .collapse {
+      display: block;
+      max-height: 0;
+      transition: max-height 0.3s;
+      overflow: hidden;
+    }
+
+    .nav-second-level {
+      background: transparent;
+
+      li a {
+        font-size: 13px;
+      }
+    }
+
+    &.active {
+      .collapse {
+        height: auto;
+        max-height: 170px;
+      }
+    }
+  }
+}

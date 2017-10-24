@@ -1,0 +1,61 @@
+@import "../../../styles/_variables";
+
+.multiselect-container {
+  position: relative;
+
+  .text-container {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 25px;
+  }
+
+  .multiselect-dropdown {
+    min-width: calc(100% + 2px);
+    position: absolute;
+    max-height: 160px;
+    background-color: white;
+    left: -1px;
+    padding: 5px 20px 5px 15px;
+    top: 29px;
+    border: inherit;
+    z-index: 10;
+    overflow-x: hidden;
+
+    div {
+      cursor: pointer;
+      white-space: nowrap;
+      padding-left: 23px;
+    }
+  }
+
+  i {
+    position: absolute;
+    right: 15px;
+
+    &.fa-caret-down, &.fa-caret-up {
+      top: 7px;
+      font-size: 18px;
+    }
+
+    &.fa-check {
+      left: 15px;
+      color: $navy;
+      font-size: 16px;
+      margin-top: 2px;
+    }
+  }
+
+  .btn-circle {
+    position: absolute;
+    left: 15px;
+    margin-top: 2px;
+    border-color: #ABABAB;
+    width: 15px;
+    height: 15px;
+
+    &:hover {
+      border-color: $navy;
+    }
+  }
+}

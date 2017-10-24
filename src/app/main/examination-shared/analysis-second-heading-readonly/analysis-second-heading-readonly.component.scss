@@ -1,0 +1,35 @@
+@import '../../../../styles/_variables';
+
+.customer-name {
+  align-self: flex-start;
+  strong {
+    font-size: 16px;
+  }
+}
+
+.vertical-align .row {
+  display: block;
+}
+
+.margin-bottom {
+  margin-bottom: 15px;
+}
+
+textarea {
+  min-height: 83px;
+}
+
+.readonly {
+  padding-top: 7px;
+  display: inline-block;
+}
+
+.text-primary {
+  color: $navy;
+}
+
+i {
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+}

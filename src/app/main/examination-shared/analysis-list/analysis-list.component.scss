@@ -1,0 +1,82 @@
+:host {
+  .table {
+    th {
+      padding-left: 0;
+      padding-right: 0;
+      white-space: nowrap;
+    }
+
+    tr.deleted {
+      color: red;
+      opacity: 0.5;
+    }
+
+    td.text-right {
+      min-width: 100px;
+
+      i {
+        margin-left: 3px;
+      }
+    }
+  }
+
+  my-date-picker {
+    display: inline-block;
+    vertical-align: middle;
+    &:first-of-type {
+      margin-right: 5px;
+    }
+    width: 33%;
+
+    /deep/ .mydp {
+      width: 100% !important;
+    }
+  }
+
+  #analysis-id {
+    width: calc(100% - 95px);
+  }
+
+  #partner-number {
+    width: calc(100% - 100px);
+  }
+
+  td .btn {
+    float: right;
+    margin: 17px 10px 17px 0;
+  }
+
+  .form-group {
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+    &:first-of-type {
+      width: 30%;
+    }
+
+    &:nth-of-type(2), &:nth-of-type(3){
+      width: 18%;
+    }
+
+    &:last-of-type {
+      width: 7%;
+    }
+
+    .i-checks label {
+      margin-bottom: 0;
+    }
+
+    button {
+      float: right;
+    }
+
+    label {
+      margin-right: 8px;
+    }
+  }
+
+  .table.sortable tbody td.text-right .fa.disabled {
+    color: lightgray;
+    cursor: not-allowed;
+  }
+}

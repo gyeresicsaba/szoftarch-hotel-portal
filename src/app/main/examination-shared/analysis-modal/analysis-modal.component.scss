@@ -1,0 +1,17 @@
+.modal-backdrop {
+  display: none;
+}
+
+.in {
+  display: block;
+}
+
+/deep/ .app-analysis-modal-footer {
+  display: inline-block;
+
+  .btn {
+    &:first-of-type {
+      margin-left: 2px;
+    }
+  }
+}

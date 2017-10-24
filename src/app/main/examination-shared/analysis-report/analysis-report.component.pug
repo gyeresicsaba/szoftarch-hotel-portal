@@ -1,0 +1,40 @@
+//-
+   Created by ekemate on 2017. 03. 20..
+
+div.row.save(*ngIf="(!analysis?.report_approved || hasExcel) && !analysis.deleted")
+  div.col-xs-12.text-center
+    a.btn.btn-primary([routerLink]="['/print', apiUrl + analysisUrl + '/' + analysisId + '/report?token=' + jwtToken]", (click)="print($event)", target='_blank', *ngIf="!analysis?.report_approved") Nyomtatás
+    button.btn.btn-primary(type="button", (click)="save()", *ngIf="!analysis?.report_approved") Mentés
+    button.btn.btn-primary(type="button", [disabled]="!analysis?.report_saved", (click)="approveBtn()", *ngIf="canApprove && !analysis.central && !analysis?.report_approved") Jegyzőkönyv jóváhagyása
+    button.btn.btn-primary(type="button", [disabled]="!analysis?.report_saved", (click)="central()", *ngIf="canApprove && analysis.central") Központilag feladva
+    a.btn.btn-primary(*ngIf="hasExcel", [href]="excelUrl", download, [ngClass]="{'disabled': !analysis?.report_approved}") Excel export
+div.text-center.pdf-toolbar
+  div.btn-group
+    button.btn.btn-white([disabled]="pageNumber <= 1", (click)="prev()")
+      i.fa.fa-long-arrow-left
+      span &nbsp;Előző
+    button.btn.btn-white([disabled]="pageNumber >= maxPageNum", (click)="next()")
+      i.fa.fa-long-arrow-right
+      span &nbsp;Következő
+    button.btn.btn-white([disabled]="scale >= 2", (click)="zoomIn()")
+      i.fa.fa-search-minus
+      span &nbsp;Nagyítás
+    button.btn.btn-white([disabled]="scale <= 0.25", (click)="zoomOut()")
+      i.fa.fa-search-minus
+      span &nbsp;Kicsinyítés
+    button.btn.btn-white([disabled]="scale == 1", (click)="setZoomDefault()")
+      span 100%
+    span.btn.btn-white Oldal: {{ pageNumber }}/{{ maxPageNum }}
+
+div.canvas-container.text-center.m-t-md
+  canvas#pdf-canvas.border-left-right.border-top-bottom.b-r-md
+
+//- User select modal
+app-analysis-modal([title]="'Készítő/jóváhagyó kiválasztása'", [(visible)]="userSelectVisible")
+  div.app-analysis-modal-body
+    h4 Válassza ki a készítőt!
+    app-typeahead([items]="users", [resetSubject]="resetSubject", [(selected)]="selectedUser", (searchChanged)="getUsers($event)", [canAdd]="false", [placeholder]="'Név'", *ngIf="initialized")
+    h4 Válassza ki a jóváhagyót!
+    app-typeahead([items]="usersAppr", [resetSubject]="resetSubject", [(selected)]="selectedApprove", (searchChanged)="getUsersAppr($event)", [canAdd]="false", [placeholder]="'Név'", *ngIf="initialized")
+  div.app-analysis-modal-footer
+    button.btn.btn-primary(type="button", [disabled]="!selectedUser || ! selectedApprove", (click)="approve()") Jóváhagyás

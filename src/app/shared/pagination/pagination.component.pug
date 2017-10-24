@@ -1,0 +1,18 @@
+//-
+   Created by ekemate on 2017. 04. 05..
+
+ul.pagination.pull-right
+  li(*ngIf="elements.meta.current_page > 1")
+    a((click)="paginate(1)")
+      i.fa.fa-angle-double-left
+  li(*ngIf="elements.meta.current_page > 1")
+    a((click)="paginate(elements.meta.current_page - 1)")
+      i.fa.fa-angle-left
+  li(*ngFor="let i of forArray", [ngClass]="{active: i === elements.meta.current_page}")
+    a((click)="paginate(i)") {{ i }}
+  li(*ngIf="elements.meta.current_page < elements.meta.total_pages")
+    a((click)="paginate(elements.meta.current_page + 1)")
+      i.fa.fa-angle-right
+  li(*ngIf="elements.meta.current_page < elements.meta.total_pages")
+    a((click)="paginate(elements.meta.total_pages)")
+      i.fa.fa-angle-double-right

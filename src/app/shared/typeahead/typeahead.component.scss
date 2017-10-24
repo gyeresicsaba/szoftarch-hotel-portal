@@ -1,0 +1,11 @@
+:host {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+.dropdown-menu {
+  display: block;
+  max-height: 300px;
+  overflow-x: hidden;
+  max-width: 100%;
+}

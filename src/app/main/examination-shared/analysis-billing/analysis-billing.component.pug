@@ -1,0 +1,43 @@
+//
+   Created by csoma on 2017. 03. 22..
+
+app-analysis-second-heading-readonly(*ngIf="data", [data]="data")
+
+div.ibox-content.m-b-xs
+  div.row
+    strong.col-xs-2 Költségviselő
+    span.col-xs-2 {{ tableData.payer.name }} ({{ tableData.payer.number }})
+
+div.ibox-content.m-b-xs
+  table.table.table-striped
+    thead
+      tr
+        th Megnevezés
+        th Cikkszám
+        th Darab
+        th Egységár
+        th Részösszeg
+    tbody
+      tr(*ngFor="let elem of tableData.rows; let idx = index;")
+        td {{ elem.name }}
+        td
+          select.form-control([(ngModel)]="tmpItem[idx]", (ngModelChange)="itemChanged($event, idx)", *ngIf="!readonly")
+            option([ngValue]="null")
+            option(*ngFor="let item of itemNumbers", [ngValue]="item") {{ item.id }} - {{ item.name }}
+          span(*ngIf="readonly") {{ elem.item_number }}
+        td
+          input.form-control(type="number", [(ngModel)]="elem.quantity", *ngIf="!readonly")
+          span(*ngIf="readonly") {{ elem.quantity }}
+        td {{ elem.unit_price }} Ft
+        td {{ elem.unit_price * elem.quantity}} Ft
+
+div.ibox-content.m-b-xs
+  div.row
+    strong.col-xs-2.col-xs-offset-8 Végösszeg
+    span.col-xs-2 {{ Price }} Ft
+
+div.ibox-content.m-b-xs.border-bottom(*ngIf="!readonly")
+  div.row
+    div.col-xs-12.text-right
+      button(type="button", [disabled]="!ButtonsEnabled", (click)="save()").btn.btn-primary Számlázás mentése
+      button(type="button", [disabled]="!ButtonsEnabled || !isSaved", (click)="send()", *ngIf="canBill").btn.btn-primary Számlázás jóváhagyása

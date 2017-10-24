@@ -1,0 +1,10 @@
+div.multiselect-container.form-control((click)="isOpen = true")
+  div.text-container(*ngIf="!showCounterOnly")
+    span(*ngFor="let selectedItem of selectedItems") {{ selectedItem }},&nbsp;
+  span(*ngIf="showCounterOnly") {{ selectedItems.length }} kiválasztva
+  i.fa([ngClass]="{'fa-caret-down': !isOpen, 'fa-caret-up': isOpen}", (click)="caretClick($event)")
+  div.multiselect-dropdown(*ngIf = "isOpen")
+    div(*ngFor="let item of items", (click)="toggleSelect(item)")
+      i.btn.btn-circle.multiselect-icon(*ngIf="!selectedItems || !(selectedItems.indexOf(item) > -1)")
+      i.fa.fa-check.multiselect-icon(*ngIf="selectedItems && selectedItems.indexOf(item) > -1")
+      | {{ item }}

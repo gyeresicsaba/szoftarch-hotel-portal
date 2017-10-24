@@ -1,0 +1,47 @@
+//-
+   Created by ekemate on 2017. 03. 21..
+
+app-analysis-second-heading-readonly(*ngIf="data", [data]="data")
+
+div(*ngIf="elems.length").ibox-content.m-b-xs.border-bottom
+  table.table.table-striped
+    thead
+      tr
+        th Név
+        th Email
+        th.text-center Kiküldve
+        th Utoljára kiküldve
+        th.text-right(*ngIf="!deleted") Küldés
+    tbody
+      tr(*ngFor="let elem of elems")
+        td {{ elem.name }}
+        td {{ elem.email }}
+        td.text-center([ngClass]="{'text-primary': elem.sent_at, 'text-danger': !elem.sent_at}")
+          i.fa([ngClass]="{'fa-check': elem.sent_at, 'fa-times': !elem.sent_at}")
+        td {{ elem.sent_at?.format('YYYY.MM.DD') }}
+        td.text-right(*ngIf="!deleted")
+          i.fa.fa-envelope-o((click)="reportSend(elem)")
+div.ibox-content.m-b-xs.border-bottom(*ngIf="!deleted")
+  div.row
+    div.col-xs-12.text-right
+      a.btn.btn-primary([routerLink]="['/print', apiUrl + analysisUrl + '/' + analysisId + '/report/print/original?token=' + jwtToken]", (click)="print($event)", target='_blank', *ngIf="canPrint") Aláírás nélküli nyomtatása
+      a.btn.btn-primary([routerLink]="['/print', apiUrl + analysisUrl + '/' + analysisId + '/report/print?token=' + jwtToken]", (click)="print($event)", target='_blank') Aláírt nyomtatása
+      a.btn.btn-primary((click)="sendAll()") Küldés mindenkinek
+
+app-analysis-modal([title]="'Jegyzőkönyv küldése'", [(visible)]="sendModalVisible", *ngIf="currentItem")
+  div.app-analysis-modal-body.form
+    p.m-b-xl.sent(*ngIf="currentItem.sent_at") A jegyzőkönyv már korábban kiküldésre került.
+    p.m-b-xl.sent(*ngIf="!data.sentable") Vizsgálat nem kiküldhető.
+    div.form-group
+      label.control-label(for="emailSubject") Tárgy:
+      input.form-control#emailSubject(type="text", [(ngModel)]="subject")
+    div.form-group
+      label.control-label(for="emailTemplate") E-mail szövege:
+      textarea.form-control#emailTemplate([(ngModel)]="message")
+    div.form-group
+      label.control-label Jegyzőkönyv:
+      a.downloadurl(target="_blank", download, [href]="apiUrl + analysisUrl + '/' + analysisId + '/report/download?token=' + jwtToken")
+        i.fa.fa-file-pdf-o
+        | {{ analysisFullId }}.pdf
+  div.app-analysis-modal-footer
+    button.btn.btn-primary(type="button", (click)="sendModalCallback()", [disabled]="sendButtonDisabled") Jegyzőkönyv küldése

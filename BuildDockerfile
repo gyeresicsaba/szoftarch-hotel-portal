@@ -1,0 +1,35 @@
+FROM buildpack-deps:yakkety-curl
+
+RUN dpkg --add-architecture i386
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  nodejs \
+  yarn \
+  libfontconfig \
+  libltdl7 \
+  gcc-multilib \
+  g++-multilib \
+  wine32 \
+  wine-stable \
+  mono-devel \
+  ca-certificates-mono \
+  git \
+  openssh-client \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
+ENV WINEDEBUG -all,err+all
+ENV WINEDLLOVERRIDES winemenubuilder.exe=d
+
+RUN wineboot --init || true
+
+RUN groupadd --gid 1000 node \
+  && useradd --uid 1000 --gid node --shell /bin/bash --create-home node

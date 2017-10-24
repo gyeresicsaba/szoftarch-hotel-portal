@@ -1,0 +1,17 @@
+//-
+   Created by ekemate on 2017. 03. 10..
+
+div.modal.inmodal.in(role="dialog", [ngClass]="{'in': visible}")
+  div.modal-dialog([style.width]="width")
+    div.modal-content
+      div.modal-header
+        button.close(type="button", (click)="closeFunction()")
+          span(aria-hidden="true") ×
+          span.sr-only Close
+        h4.modal-title {{ title }}
+      div.modal-body
+        ng-content(select=".app-analysis-modal-body")
+      div.modal-footer
+        button.btn(type="button", (click)="closeFunction()") Mégse
+        ng-content(select=".app-analysis-modal-footer")
+div.modal-backdrop([ngClass]="{'in': visible}")

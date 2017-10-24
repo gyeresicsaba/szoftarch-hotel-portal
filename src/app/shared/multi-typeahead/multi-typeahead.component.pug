@@ -1,0 +1,4 @@
+textarea.form-control([placeholder]="placeholder || 'Megjegyzés'", [rows]="rows", [formControl]="searchControl", (keydown)="keyUp($event)", (focusout)="focusOut()")
+ul#typeahead.typeahead.dropdown-menu(role="listbox", *ngIf="!selected")
+  li.typehead-elem(*ngFor="let item of ownItems", [ngClass]="{'active': item.active}", (click)="selectElem(item.value)")
+    a.dropdown-item {{ item.value.DisplayValue }}

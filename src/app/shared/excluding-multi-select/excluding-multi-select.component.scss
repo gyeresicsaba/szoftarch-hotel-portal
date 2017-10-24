@@ -1,0 +1,33 @@
+@import "../multi-select/multi-select.component";
+
+.multiselect-container {
+  .selected-items {
+    overflow: hidden;
+    margin-right: 20px;
+    white-space: nowrap;
+  }
+
+  .multiselect-dropdown {
+    max-height: 200px;
+    i {
+      &.fa-check {
+        color: transparent;
+
+        &.selected {
+          color: $navy;
+        }
+
+        &.circle:before {
+          border-radius: 50%;
+        }
+
+        &:before {
+          border: 1px solid #ABABAB;
+        }
+      }
+    }
+    hr {
+      margin: 10px 0;
+    }
+  }
+}

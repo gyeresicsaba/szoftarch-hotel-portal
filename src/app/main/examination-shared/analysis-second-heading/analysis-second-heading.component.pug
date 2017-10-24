@@ -1,0 +1,77 @@
+//-
+   Created by ekemate on 2017. 03. 14..
+
+div.ibox-content.m-b-xs.border-bottom.form-horizontal
+  div.row.vertical-align.margin-bottom
+    div.col-xs-3.customer-name
+      strong {{ data.customer.name }}
+      br
+      span  ({{ data.customer.number }})
+    div.col-xs-3
+      div.row(*ngIf="!isTamponHeader && !isMastitisHeader", [ngClass]="{'has-error': (!data.dates.sample_taken_at || !data.dates.sample_taken_at.isValid()) && !isFeedtoxinHeader}")
+        label.col-xs-4.control-label Mintavétel:
+        div.col-xs-8
+          my-date-picker.mydatepicker([options]="sampleTakenAtDatePickerOptions", (dateChanged)="pickerSampleTakenAtDateChange($event)", [selDate]="sampleTakenAtDateModel.date",  [locale]="'hu'")
+      div.row(*ngIf="isTamponHeader || isMastitisHeader", [ngClass]="{'has-error': !data.sample_delivery_method}")
+        label.col-xs-4.control-label Beszállítás módja:
+        div.col-xs-8
+          select.form-control([(ngModel)]="data.sample_delivery_method", (ngModelChange)="dataChange.emit(data)")
+            option(*ngFor="let method of sampleDeliveryMethods", [value]="method.name") {{ method.name }}
+    div.col-xs-6
+      div.row
+        div.col-xs-8
+          div.row(*ngIf="data.hasOwnProperty('production_controller')")
+            label.col-xs-4.control-label Term. ell.:
+            div.col-xs-8
+              app-typeahead([items]="sampleSentByDictionaryElements.data", [(selected)]="selectedSampleSentByDictionaryElement", [resetSubject]="resetSubject", (selectedChange)="selectSampleSentByDictionaryElement($event)", (searchChanged)="getSampleSentByDictionaryElements($event)", [canAdd]="false", [placeholder]="'Term. ell.'")
+        div.col-xs-2.text-right
+          strong Érkeztetve:
+        div.col-xs-2 {{ data.dates.analysis_created_at?.format('YYYY.MM.DD') || '-' }}
+  div.row
+    div.col-xs-3
+      div.i-checks([ngClass]="{'checked': data.sentable}")
+        label
+          input(type="checkbox", name="sentable", [(ngModel)]="data.sentable", (ngModelChange)="dataChange.emit(data)")
+          | Kiküldhető
+      div.i-checks([ngClass]="{'checked': data.testable}")
+        label
+          input(type="checkbox", name="testable", [(ngModel)]="data.testable", (ngModelChange)="dataChange.emit(data)")
+          | Vizsgálható
+      div.i-checks([ngClass]="{'checked': data.postage}", *ngIf="data.hasOwnProperty('postage')")
+        label
+          input(type="checkbox", name="postage", [(ngModel)]="data.postage", (ngModelChange)="dataChange.emit(data)")
+          | Postaköltség
+      div.i-checks([ngClass]="{'checked': data.english}", *ngIf="data.hasOwnProperty('english')")
+        label
+          input(type="checkbox", name="english", [(ngModel)]="data.english", (ngModelChange)="dataChange.emit(data)")
+          | Angol jk.
+    div.col-xs-3
+      div.row.vertical-align.margin-bottom([ngClass]="{'has-error': !data.dates.sample_arrived_at || !data.dates.sample_arrived_at.isValid() }")
+        label.col-xs-4.control-label Beérkezés:
+        div.col-xs-8
+          my-date-picker.mydatepicker([options]="sampleArrivedAtDatePickerOptions", (dateChanged)="pickerSampleArrivedAtDateChange($event)", [selDate]="sampleArrivedAtDateModel.date",  [locale]="'hu'")
+      div.row.vertical-align.margin-bottom([ngClass]="{'has-error': !data.dates.examine_made_at || !data.dates.examine_made_at.isValid() }")
+        label.col-xs-4.control-label Vizsgálat:
+        div.col-xs-8
+          my-date-picker.mydatepicker([options]="examineMadeAtDatePickerOptions", (dateChanged)="pickerExamineMadeAtDateChange($event)", [selDate]="examineMadeAtDateModel.date",  [locale]="'hu'")
+      div.form-group(*ngIf="data.hasOwnProperty('sample_number')", [ngClass]="{'has-error': !data.sample_number}")
+        label(for="sample_number").col-xs-4.control-label Minták száma:
+        div.col-xs-8
+          input#sample_number.form-control(type="number", placeholder="0", name="sample_number", [(ngModel)]="data.sample_number", (ngModelChange)="dataChange.emit(data)")
+    div.col-xs-4
+      div([ngClass]="{'height-only': heightOnly, 'height-and-pos': heightAndPos}").form-group
+        label(for="comment").col-xs-3.control-label Megjegyzés:
+        div.col-xs-9
+          //textarea#comment.form-control(placeholder="Megjegyzés", name="comment", [(ngModel)]="data.comment", (ngModelChange)="dataChange.emit(data)")
+          app-multi-typeahead#comment([placeholder]="'Megjegyzés'", [rows]="3", [items]="commentItems.data", [(value)]="data.comment", (valueChange)="dataChange.emit(data)", (searchChanged)="getComments($event)")
+    div.col-xs-2
+      div.row.date.margin-bottom
+        div.col-xs-6.text-right
+          strong Levizsgálva:
+        div.col-xs-6 {{ data.dates.examined_at?.format('YYYY.MM.DD') || '-' }}
+      div.row.date.margin-bottom
+        div.i-checks.col-xs-8.text-right([ngClass]="{'checked': data.pre_billed}", *ngIf="data.hasOwnProperty('pre_billed')")
+          label
+            input(type="checkbox", name="pre_billed", [(ngModel)]="data.pre_billed", (ngModelChange)="dataChange.emit(data)")
+            | Számlázva
+

@@ -1,0 +1,19 @@
+//-
+   Created by ekemate on 2017. 04. 11..
+
+div.modal.inmodal.in(role="dialog", [ngClass]="{'in': visible}", *ngIf="modal")
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        button.close(type="button", (click)="close()")
+          span(aria-hidden="true") ×
+          span.sr-only Close
+        h4.modal-title.text-danger(*ngIf="modal.title") {{ modal.title }}
+      div.modal-body(*ngIf="modal.errors")
+        div(*ngFor="let error of modal.errors")
+          h4.text-danger {{ error.name }}:
+          div.text-danger(*ngFor="let errorString of error.errors") {{ errorString }}
+      div.modal-footer
+        button.btn(type="button", (click)="close()") Mégse
+        button.btn(*ngFor="let button of modal.buttons", (click)="button.callback()", [ngClass]="button.classes") {{ button.text }}
+div.modal-backdrop([ngClass]="{'in': visible}")

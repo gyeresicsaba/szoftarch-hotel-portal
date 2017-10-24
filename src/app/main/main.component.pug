@@ -1,0 +1,20 @@
+//-
+   Created by ekemate on 2017. 02. 17..
+div#wrapper
+  // Left navbar
+  app-navigation#navigation
+
+  div#page-wrapper.gray-bg
+    app-top-navbar
+    app-spinner([spinnerId]="'wrapper'")
+    router-outlet
+    div.footer
+      div.pull-right | API: {{ apiVersion }}
+      div.pull-right | Verzió: {{ appVersion }}
+      div.pull-right
+        a(href="http://www.innobile.hu") Innobile
+      div
+        strong Hotel-portál
+app-toast-container
+app-modal
+app-error-modal

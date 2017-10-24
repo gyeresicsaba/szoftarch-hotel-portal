@@ -1,0 +1,63 @@
+//-
+   Created by ekemate on 2017. 02. 17..
+
+nav.navbar-default.navbar-static-side(role="navigation")
+  div.sidebar-collapse
+    ul#side-menu.nav.metismenu
+      li.nav-header
+        div.dropdown.profile-element
+          a.dropdown-toggle(data-toggle="dropdown", aria-expanded="true")
+            span.block.m-t-xs
+              strong.font-bold([routerLink]="'/profile'") {{ user?.name }}
+              //span.text-muted.text-xs.block Beállítások
+                b.caret
+          ul.dropdown-menu.m-t-xs.animated.fadeInRight
+            li
+              a Logout
+      li([ngClass]="{active: activeRoute('/', true)}")
+        a([routerLink]="'/'")
+          i.fa.fa-th-large
+          span.nav-label Főoldal
+      li([ngClass]="{active: activeRoute('/admin')}", *ngIf="user.IsAdmin")
+        a([routerLink]="'/admin'")
+          i.fa.fa-th-large
+          span.nav-label Adminisztráció
+          span.fa.arrow
+        ul.nav.nav-second-level([ngClass]="{collapse: !activeRoute('/admin')}")
+          li([ngClass]="{active: activeRoute('/admin/partners')}", *ngIf="user.modules.hasOwnProperty('partner')")
+            a([routerLink]="'/admin/partners'") Partnerek
+          li([ngClass]="{active: activeRoute('/admin/contacts')}", *ngIf="user.modules.hasOwnProperty('partner')")
+            a([routerLink]="'/admin/contacts'") Kapcsolattartók
+          li([ngClass]="{active: activeRoute('/admin/users')}", *ngIf="user.modules.hasOwnProperty('service')")
+            a([routerLink]="'/admin/users'") Felhasználók
+          li([ngClass]="{active: activeRoute('/admin/permissions')}", *ngIf="user.modules.hasOwnProperty('service')")
+            a([routerLink]="'/admin/permissions'") Szerepkörök
+          li([ngClass]="{active: activeRoute('/admin/dictionaries')}", *ngIf="user.modules.hasOwnProperty('service')")
+            a([routerLink]="'/admin/dictionaries'") Szótárak
+          li([ngClass]="{active: activeRoute('/admin/item-numbers')}", *ngIf="user.modules.hasOwnProperty('service')")
+            a([routerLink]="'/admin/item-numbers'") Cikkszámok
+      li([ngClass]="{active: activeRoute('/' + module.path)}", *ngFor="let module of analysisModules | canAccess:user")
+        a([routerLink]="'/' + module.path")
+          i.fa.fa-th-large
+          span.nav-label {{ module.name }}
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse([ngClass]="{collapse:  !activeRoute('/' + module.path)}")
+          li([ngClass]="{active: activeRoute('/' + module.path + '/list')}")
+            a([routerLink]="'/' + module.path + '/list'") Listázás
+          li([ngClass]="{active: activeRoute('/' + module.path + '/analysis')}")
+            a([routerLink]="'/' + module.path + '/analysis'") Beérkeztetés
+          li(*ngIf="module.path === 'mastitis' || module.path === 'pag'", [ngClass]="{active: activeRoute('/' + module.path + '/statistic')}")
+            a([routerLink]="'/' + module.path + '/statistic'") Statisztika
+          li(*ngIf="module.path === 'pag'", [ngClass]="{active: activeRoute('/' + module.path + '/pagbox')}")
+            a([routerLink]="'/' + module.path + '/pagbox'") Doboznyilvántartó
+      li([ngClass]="{active: activeRoute('/box')}", *ngIf="user.modules.hasOwnProperty('box')")
+        a([routerLink]="'/box'")
+          i.fa.fa-th-large
+          span.nav-label Doboznyilvántartó
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse([ngClass]="{collapse: !activeRoute('/box')}")
+          li([ngClass]="{active: activeRoute('/box/list')}")
+            a([routerLink]="'/box/list'") Lista
+          li([ngClass]="{active: activeRoute('/box/summary')}")
+            a([routerLink]="'/box/summary'") Összesített Lista
+

@@ -1,0 +1,17 @@
+//-
+   Created by ekemate on 2017. 02. 21..
+
+div.row.border-bottom
+  nav.navbar.navbar-fixed-top.white-bg
+    div.navbar-header
+      a.navbar-minimalize.minimalize-styl-2.btn.btn-primary((click)="toggleClass()")
+        i.fa.fa-bars
+      ol#breadcrumb.breadcrumb
+        li(*ngFor="let breadcrumb of breadcrumbs", [ngClass]="{active: activeRoute(breadcrumb.url)}")
+          a([routerLink]="breadcrumb.url") {{ breadcrumb.label }}
+      span.is-demo(*ngIf="isDemo") Teszt verzió
+    ul.nav.navbar-top-links.navbar-right
+      li
+        a#log-out((click)="authService.logOut()")
+          i.fa.fa-sign-out
+          | Kijelentkezés

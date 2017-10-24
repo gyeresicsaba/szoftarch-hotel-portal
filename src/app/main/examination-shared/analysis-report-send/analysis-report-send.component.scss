@@ -1,0 +1,36 @@
+@import '../../../../styles/_variables';
+
+td {
+  &.text-primary {
+    color: $navy;
+  }
+  .fa {
+    font-size: 18px;
+  }
+
+  &.text-right {
+    .fa {
+      cursor: pointer;
+      margin-left: 10px;
+      color: inherit;
+    }
+  }
+
+}
+
+p.sent {
+  border: 1px solid $gray;
+  padding: 20px;
+}
+
+textarea.form-control {
+  min-height: 300px;
+}
+
+a.downloadurl {
+  padding: 5px;
+
+  > .fa {
+    margin-right: 3px;
+  }
+}

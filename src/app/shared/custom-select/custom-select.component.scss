@@ -1,0 +1,43 @@
+:host {
+  background: #fff;
+  border: 1px solid rgb(169, 169, 169);
+  border-radius: 1px;
+  cursor: pointer;
+  display: block;
+  padding: 6px 0;
+  position: relative;
+
+  &.has-error {
+    border: 1px solid #ED5565;
+  }
+
+  .dropdown-menu {
+    display: block;
+    max-height: 175px;
+    overflow-y: auto;
+  }
+
+  .selected-value {
+    padding: 0 5px;
+    position: relative;
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: .4;
+    }
+
+    .item {
+      padding-right: 20px;
+    }
+
+    .fa.fa-caret-down, .fa.fa-caret-up {
+      bottom: 0;
+      font-size: 18px;
+      margin: auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 15px;
+    }
+  }
+}

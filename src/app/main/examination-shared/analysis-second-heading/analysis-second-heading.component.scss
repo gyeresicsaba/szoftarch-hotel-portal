@@ -1,0 +1,37 @@
+.customer-name {
+  align-self: flex-start;
+  strong {
+    font-size: 16px;
+  }
+}
+
+.vertical-align .row {
+  display: block;
+}
+
+.date {
+  height: 34px;
+  padding-top: 7px;
+}
+
+.margin-bottom {
+  margin-bottom: 15px;
+}
+
+textarea {
+  min-height: 83px;
+}
+
+.height-only {
+  /deep/ textarea {
+    height: 120px;
+  }
+}
+
+.height-and-pos {
+  margin-top: -57px;
+
+  /deep/ textarea {
+    height: 177px;
+  }
+}

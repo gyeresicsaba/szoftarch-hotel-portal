@@ -1,0 +1,30 @@
+//-
+   Created by ekemate on 2017. 04. 27..
+
+div.wrapper.wrapper-content.ecommerce
+  div.ibox-content.m-b-sm.border-bottom
+    div.form-inline
+      div.row
+        label.col-xs-2(for="partner-number") Tenyészet azonosító
+        input#partner-number.form-control(type="text", name="partner-number", placeholder="00-000-00", [formControl]="partnerNumberSearchControl")
+  div.row
+    div.col-lg-12
+      div.ibox
+        div.ibox-content
+          table.table.table-striped
+            thead
+              tr
+                th.text-center Tenyészet azonosító
+                th.text-center Tenyészet neve
+                th.text-center Cső egyenleg
+                th.text-center Akku egyenleg
+            tbody
+              tr(*ngFor="let box of response.data")
+                td.text-center {{ box.partner_number }}
+                td.text-center {{ box.partner_name }}
+                td.text-center {{ box.pipe_diff }}
+                td.text-center {{ box.battery_diff }}
+            tfoot(*ngIf="response.meta.total_pages > 1")
+              tr
+                td(colspan="4")
+                  app-pagination([elements]="response", [(page)]="page", (pageChange)="getList()")

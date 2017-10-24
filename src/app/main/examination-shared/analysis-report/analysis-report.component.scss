@@ -1,0 +1,22 @@
+.save {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+a.btn {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.canvas-container {
+  overflow-y: auto;
+  direction: rtl;
+}
+
+canvas {
+  direction: ltr;
+}
+
+canvas, .canvas-container {
+  transform: rotate(180deg);
+}

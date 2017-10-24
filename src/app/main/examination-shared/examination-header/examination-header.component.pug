@@ -1,0 +1,17 @@
+//-
+   Created by ekemate on 2017. 03. 10..
+
+div.ibox-content.m-b-xs.border-bottom
+  ul.tablist
+    li
+      a([routerLink]="routerLink('arrival1')", [ngClass]="{'active': isActive('arrival1'), 'done': isDone('arrival1'), 'disabled': isDisabled('arrival1')}") Beérkeztetés I.
+    li
+      a([routerLink]="routerLink('arrival2')", [ngClass]="{'active': isActive('arrival2'), 'done': isDone('arrival2'), 'disabled': isDisabled('arrival2')}") Beérkeztetés II.
+    li
+      a([routerLink]="routerLink('results')", [ngClass]="{'active': isActive('results'), 'done': isDone('results'), 'disabled': isDisabled('results')}") Eredmények
+    li
+      a([routerLink]="routerLink('report')", [ngClass]="{'active': isActive('report'), 'done': isDone('report'), 'disabled': isDisabled('report')}") Jegyzőkönyv
+    li
+      a([routerLink]="routerLink('report-send')", [ngClass]="{'active': isActive('report-send'), 'done': isDone('report-send'), 'disabled': isDisabled('report-send')}") Jegyzőkönyv küldés
+    li
+      a([routerLink]="routerLink('billing')", [ngClass]="{'active': isActive('billing'), 'done': isDone('billing'), 'disabled': isDisabled('billing')}") Számlázás

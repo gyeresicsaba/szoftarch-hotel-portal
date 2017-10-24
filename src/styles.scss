@@ -1,0 +1,345 @@
+/*
+ *
+ *   INSPINIA - Responsive Admin Theme
+ *   version 2.7
+ *
+*/
+// Google Fonts
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+// Toastr
+@import "styles/_toastr";
+// Bootstrap Tagsinput
+@import "styles/_bootstrap-tagsinput";
+// Variables, Mixins
+@import "styles/_variables";
+@import "styles/_mixins";
+// INSPINIA Theme Elements
+@import "styles/_typography";
+@import "styles/_navigation";
+@import "styles/_top_navigation";
+@import "styles/_buttons";
+@import "styles/_badges_labels";
+@import "styles/_elements";
+@import "styles/_sidebar";
+@import "styles/_base";
+@import "styles/_pages";
+@import "styles/_chat";
+@import "styles/_metismenu";
+@import "styles/_spinners";
+// Landing page styles
+@import "styles/_landing";
+// RTL Support
+@import "styles/_rtl";
+// INSPINIA Skins
+@import "styles/_skins";
+@import "styles/_md-skin";
+// Media query style
+@import "styles/_media";
+// Custom style
+// Your custom style to override base style
+@import "styles/_custom";
+
+// Clear layout on print mode
+@media print {
+  nav.navbar-static-side {
+    display: none;
+  }
+  body {
+    overflow: visible !important;
+  }
+
+  #page-wrapper {
+    margin: 0;
+  }
+}
+
+.spinner-container {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+
+  .sk-spinner {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+
+.i-checks {
+  label {
+    height: 22px;
+    position: relative;
+    padding-left: 30px;
+    padding-top: 2px;
+    cursor: pointer;
+    margin-bottom: 10px;
+
+    input {
+      display: none;
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      height: 22px;
+      width: 22px;
+      border: 1px solid #ccc;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: white;
+    }
+
+    &:hover {
+      &:before {
+        border-color: #1ab394;
+      }
+    }
+  }
+
+  &.disabled {
+    label {
+      cursor: not-allowed;
+
+      &:before {
+        /*content: '';
+        background-color: #ddd;*/
+        border-color: #ddd;
+      }
+    }
+  }
+
+  &.checked {
+    label {
+      &:before {
+        content: '\2713';
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+
+    &.disabled {
+      label {
+        &:before {
+          opacity: 0.4;
+          /*background-color: #ddd;
+          border-color: #ddd;*/
+        }
+      }
+    }
+  }
+}
+
+/* Datepicker */
+.mydatepicker {
+  .mydp {
+    background: #FFFFFF none;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    //padding: 6px 12px;
+    -webkit-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    font-size: 14px;
+    height: 30px;
+
+    &:focus {
+      border-color: $navy;
+    }
+
+    &:hover {
+      border-color: $navy;
+    }
+
+    .selection {
+      color: $text-color;
+      background: transparent;
+    }
+
+    .btnpicker {
+      display: block;
+      height: 28px;
+      background: transparent;
+      border-radius: 0;
+    }
+
+    .btnpickerenabled {
+      &:hover {
+        background-color: $navy;
+      }
+    }
+
+    .selectiongroup {
+      background-color: transparent;
+      width: calc(100% + 1px);
+    }
+  }
+}
+
+.has-error {
+  .mydatepicker {
+    .mydp {
+      border-color: $red;
+    }
+  }
+
+  .help-block {
+    color: $red;
+    font-weight: bold;
+  }
+
+  &.i-checks label:before {
+    border-color: $red;
+  }
+}
+
+.bootstrap-tagsinput {
+  width: 100%;
+  min-height: 64px;
+
+  .tag {
+    display: inline-block;
+  }
+}
+
+/* Table */
+.table {
+  margin-bottom: 0;
+
+  &.sortable {
+    th {
+      .fa {
+        margin-left: 5px;
+      }
+
+      &.sortable span {
+        cursor: pointer;
+      }
+    }
+
+    tbody, thead {
+      td {
+        &.text-primary {
+          color: $navy;
+        }
+        .fa {
+          font-size: 18px;
+        }
+
+        &.text-right {
+          .fa {
+            cursor: pointer;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  td > p {
+    margin: 0;
+  }
+
+  > tbody > tr > td {
+    vertical-align: middle;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .actions {
+    min-width: 70px;
+    .fa {
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 10px;
+    }
+  }
+}
+
+.form-control {
+  height: 30px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.ibox-content {
+  padding: 10px;
+}
+
+.wrapper-content {
+  padding: 10px 0 40px;
+}
+
+.btn {
+  margin-left: 1px;
+  margin-right: 1px;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+hr, .modal-footer {
+  border-top-color: $border-color;
+}
+
+.modal-header {
+  border-bottom-color: $border-color;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #e3e3e3;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=file] {
+  color: transparent;
+  width: 130px;
+}
+
+@page {
+  margin: 0;
+  size: portrait;
+}
+
+.body-small {
+  #navigation {
+    display: block;
+  }
+}
+
+#navigation {
+  display: none;
+}

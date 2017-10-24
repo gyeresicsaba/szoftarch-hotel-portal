@@ -1,0 +1,143 @@
+//-
+   Created by ekemate on 2017. 03. 10..
+
+div.ibox
+  div.ibox-content
+    div.row
+      div.col-xs-10
+        h3 Megrendelő adatai
+      div.col-xs-2.text-right
+        button.btn.btn-primary.btn-xs(type="button", (click)="partnerSelectVisible = true", *ngIf="!readonly") Kiválaszt
+        button.btn.btn-primary.btn-xs(type="button", (click)="contactSelectVisible = true", *ngIf="!readonly && !!addedPartner") Kapcsolattartó
+    hr
+    div.row.margin-bottom
+      div.col-xs-3.text-right
+        strong Megrendelő neve:
+      div.col-xs-3
+        span {{ addedPartner?.name }}
+      div.col-xs-3.text-right
+        strong Kapcsolattartó neve:
+      div.col-xs-3
+        span {{ addedPartnerContact?.name }}
+    div.row.margin-bottom
+      div.col-xs-3.text-right
+        strong Megrendelő azonosítója:
+      div.col-xs-3
+        span {{ addedPartner?.number }}
+      div.col-xs-3.text-right
+        strong Kapcsolattartó telefonszáma:
+      div.col-xs-3
+        span {{ addedPartnerContact?.phone }}
+    div.row.margin-bottom
+      div.col-xs-3.text-right
+        strong Megrendelő címe:
+      div.col-xs-3
+        div
+          span {{ addedPartner?.city ? addedPartner?.city + ',' : '' }} {{ addedPartner?.postal_code }}
+        div
+          span {{ addedPartner?.public_space }} {{ addedPartner?.public_space_type }} {{ addedPartner?.house_number }}
+          | &nbsp;{{ addedPartner?.floor_number ? addedPartner?.floor_number + '. emelet ' + addedPartner?.door_number + '.' : '' }}
+      div.col-xs-3.text-right
+        strong Kapcsolattartó email:
+      div.col-xs-3
+        span {{ addedPartnerContact?.email }}
+    div.row
+      div.col-xs-10
+        h3 Eredményközlés adatai
+      div.col-xs-2.text-right
+        button.btn.btn-primary.btn-xs(type="button", [disabled]="!addedPartner", (click)="resultSelectVisible = true", *ngIf="!readonly") Módosít
+    hr
+    div.row.margin-bottom
+      div.col-xs-6
+        div.row
+          div.col-xs-6.text-right
+            strong Postai cím:
+          div.col-xs-6
+            div {{ addedResult?.name }}
+            div
+              span {{ addedResult?.city ? addedResult?.city + ',' : '' }} {{ addedResult?.postal_code }}
+            div
+              span {{ addedResult?.public_space }} {{ addedResult?.public_space_type }} {{ addedResult?.house_number }}
+              | &nbsp;{{ addedResult?.floor_number ? addedResult?.floor_number + '. emelet ' + addedResult?.door_number + '.' : '' }}
+      div.col-xs-6
+        div.row
+          div.col-xs-6.text-right
+            strong Elektronikus címek:
+          div.col-xs-6
+            div(*ngFor="let contact of addedContacts") {{ contact.email }}
+    div.row
+      div.col-xs-10
+        h3 Költségviselő adatai
+      div.col-xs-2.text-right
+        button.btn.btn-primary.btn-xs(type="button", [disabled]="!addedPartner", (click)="payerSelectVisible = true", *ngIf="!readonly") Módosít
+    hr
+    div.row.margin-bottom
+      div.col-xs-3.text-right
+        strong Költségviselő neve:
+      div.col-xs-3
+        span {{ addedPayer?.name }}
+    div.row.margin-bottom
+      div.col-xs-3.text-right
+        strong Költségviselő azonosítója:
+      div.col-xs-3
+        span {{ addedPayer?.number }}
+    div.row.margin-bottom
+      div.col-xs-3.text-right
+        strong Költségviselő címe:
+      div.col-xs-3
+        div
+          span {{ addedPayer?.city ? addedPayer?.city + ',' : '' }} {{ addedPayer?.postal_code }}
+        div
+          span {{ addedPayer?.public_space }} {{ addedPayer?.public_space_type }} {{ addedPayer?.house_number }}
+          | &nbsp;{{ addedPayer?.floor_number ? addedPayer?.floor_number + '. emelet ' + addedPayer?.door_number + '.' : '' }}
+    div.row
+      div.col-xs-2.col-xs-offset-10.text-right
+        button.btn.btn-primary(type="button", (click)="reopen()", *ngIf="readonly && canReopen") Szerkesztés
+        button.btn.btn-primary(type="button", [disabled]="!addedPartner || !addedPartnerContact", (click)="save()", *ngIf="!readonly") Mentés
+
+//- no contact modal
+app-analysis-modal([title]="'Hiányzó kapcsolattartó'", [(visible)]="noAddedPartnerModal")
+  div.app-analysis-modal-body
+    h4 A partnerhez nem tartoznak kapcsolattartók! Kérem adjon hozzá egyet a folytatáshoz!
+  div.app-analysis-modal-footer
+    button.btn.btn-primary(type="button", (click)="noAddedPartnerModal = false") Rendben
+
+//- Partner select modal
+app-analysis-modal([title]="'Megrendelő kiválasztása'", [(visible)]="partnerSelectVisible")
+  div.app-analysis-modal-body
+    h4 Válassza ki a megrendelő nevét vagy azonosítóját!
+    app-typeahead([items]="partners", [resetSubject]="resetSubject", (selectedChange)="selectPartner($event)", (searchChanged)="getPartners($event)", (finish)="addPartner()", [placeholder]="'Név vagy tenyészetazonosító'")
+  div.app-analysis-modal-footer
+    button.btn.btn-primary(type="button", [disabled]="!selectedPartner", (click)="addPartner()") Kiválaszt
+
+//- Partner contact select modal
+app-analysis-modal([title]="'Kapcsolattartó adatok kiválasztása'", [(visible)]="contactSelectVisible")
+  div.app-analysis-modal-body
+    h4 Válassza ki az kapcsolattartó adatokat!
+    select.form-control(name="result", [(ngModel)]="addedPartnerContact")
+      option(*ngFor="let contact of contacts", [ngValue]="contact") {{ contact.name }}
+  div.app-analysis-modal-footer
+    button.btn.btn-primary(type="button", [disabled]="!addedPartnerContact", (click)="contactSelectVisible = false") Ok
+
+//- Result select modal
+app-analysis-modal([title]="'Eredményközlési adatok kiválasztása'", [(visible)]="resultSelectVisible")
+  div.app-analysis-modal-body
+    h4 Válassza ki az eredményközlési adatokat!
+    select.form-control(name="result", [(ngModel)]="selectedResult", (ngModelChange)="selectResult($event).subscribe()")
+      option(*ngFor="let result of results", [ngValue]="result") {{ result.name }}
+    div.i-checks([ngClass]="{'checked': selection.checked}", *ngFor="let selection of tempContacts")
+      label
+        input(type="checkbox", name="sentable", [(ngModel)]="selection.checked")
+        | {{ selection.contact.email }}
+  div.app-analysis-modal-footer
+    button.btn.btn-primary(type="button", [disabled]="!selectedResult", (click)="addResult()") Kiválaszt
+
+
+//- Payer select modal
+app-analysis-modal([title]="'Költségviselő adatok kiválasztása'", [(visible)]="payerSelectVisible")
+  div.app-analysis-modal-body
+    h4 Válassza ki az Költségviselő adatokat!
+    select.form-control(name="result", [(ngModel)]="selectedPayer")
+      option(*ngFor="let payer of payers", [ngValue]="payer") {{ payer.name }}
+  div.app-analysis-modal-footer
+    button.btn.btn-primary(type="button", [disabled]="!selectedPayer", (click)="addPayer()") Kiválaszt

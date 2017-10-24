@@ -1,0 +1,8 @@
+//-
+   Created by ekemate on 2017. 03. 03..
+
+div.toast([ngClass]="'toast-' + toast.type")
+  div.toast-progress(*ngIf="percentage", [style.width]="percentage + '%'")
+  button.toast-close-button((click)="close()") ×
+  div.toast-title {{ toast.title }}
+  div.toast-message {{ toast.message }}

@@ -1,0 +1,64 @@
+//-
+   Created by ekemate on 2017. 03. 16..
+
+div.ibox-content.m-b-xs.border-bottom.form-horizontal
+  div.row.vertical-align.margin-bottom
+    div.col-xs-3.customer-name
+      strong {{ data.customer.name }}
+      br
+      span  ({{ data.customer.number }})
+    label.col-xs-1.control-label(*ngIf="isTamponHeader || isMastitisHeader") Beszállítás módja:
+    div.col-xs-2.readonly(*ngIf="isTamponHeader || isMastitisHeader") {{ data.sample_delivery_method }}
+    label.col-xs-1.control-label(*ngIf="!isTamponHeader && !isMastitisHeader") Mintavétel:
+    div.col-xs-2.readonly(*ngIf="!isTamponHeader && !isMastitisHeader") {{ data.dates.sample_taken_at?.isValid() ? data.dates.sample_taken_at?.format('YYYY.MM.DD') : '-' }}
+    div.col-xs-6
+      div.row
+        div.col-xs-6
+          div.row(*ngIf="data.hasOwnProperty('production_controller')")
+            label.col-xs-5.col-xl-3.control-label Term. ell.:
+            div.col-xs-7.col-xl-9.readonly {{ data.production_controller }}
+        div.col-xs-2.text-right.readonly
+          strong Érkeztetve:
+        div.col-xs-2.readonly {{ data.dates.analysis_created_at?.format('YYYY.MM.DD') || '-' }}
+  div.row
+    div.col-xs-3
+      div
+        span.text-center([ngClass]="{'text-primary': data.sentable, 'text-danger': !data.sentable}")
+          i.fa([ngClass]="{'fa-check': data.sentable, 'fa-times': !data.sentable}")
+        strong Kiküldhető
+      div
+        span.text-center([ngClass]="{'text-primary': data.testable, 'text-danger': !data.testable}")
+          i.fa([ngClass]="{'fa-check': data.testable, 'fa-times': !data.testable}")
+        strong Vizsgálható
+      div(*ngIf="data.hasOwnProperty('postage')")
+        span.text-center([ngClass]="{'text-primary': data.postage, 'text-danger': !data.postage}")
+          i.fa([ngClass]="{'fa-check': data.postage, 'fa-times': !data.postage}")
+        strong Postaköltség
+      div(*ngIf="data.hasOwnProperty('english')")
+        span.text-center([ngClass]="{'text-primary': data.english, 'text-danger': !data.english}")
+          i.fa([ngClass]="{'fa-check': data.english, 'fa-times': !data.english}")
+        strong Angol jk.
+    div.col-xs-3
+      div.row.vertical-align.margin-bottom
+        label.col-xs-4.control-label Beérkezés:
+        div.col-xs-8.readonly {{ data.dates.sample_arrived_at?.format('YYYY.MM.DD') }}
+      div.row.vertical-align.margin-bottom
+        label.col-xs-4.control-label Vizsgálat:
+        div.col-xs-8.readonly {{ data.dates.examine_made_at?.format('YYYY.MM.DD') }}
+      div.form-group(*ngIf="data.hasOwnProperty('sample_number')")
+        label.col-xs-4.control-label Minták száma:
+        div.readonly.col-xs-8 {{ data.sample_number }}
+    div.col-xs-3
+      div.form-group
+        label.col-xs-5.col-xl-3.control-label Megjegyzés:
+        div.readonly.col-xs-7.col-xl-9 {{ data.comment }}
+    div.col-xs-2
+      div.row.date.margin-bottom
+        div.col-xs-6.text-right
+          strong Levizsgálva:
+        div.col-xs-6 {{ data.dates.examined_at?.format('YYYY.MM.DD') || '-' }}
+      div.row.date.margin-bottom
+        div.col-xs-6.text-right
+          strong Számlázva:
+        div.col-xs-6(*ngIf="!data.pre_billed") {{ data.dates.billed_at?.format('YYYY.MM.DD') || '-' }}
+        div.col-xs-6(*ngIf="data.pre_billed") Előre számlázva

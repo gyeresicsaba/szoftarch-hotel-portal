@@ -1,0 +1,134 @@
+div.wrapper.wrapper-content.ecommerce
+  div.ibox-content.m-b-sm.border-bottom
+    div.form-inline
+      div.form-group
+        label(for="arrival-date") Érkezési dátum
+        my-date-picker#arrival-date.mydatepicker([options]="startDatePickerOptions", (dateChanged)="pickerStartDateChange($event)", [selDate]="startDateModel.date", [locale]="'hu'")
+        my-date-picker.mydatepicker([options]="endDatePickerOptions", (dateChanged)="pickerEndDateChange($event)", [selDate]="endDateModel.date", [locale]="'hu'")
+      div.form-group
+        label(for="analysis-id") Vizsgálati a.
+        input#analysis-id.form-control(type="text", name="analysis-id", placeholder="V0000/2017", [formControl]="analysisIdSearchControl")
+      div.form-group
+        label(for="partner-number") Tenyészeta.
+        input#partner-number.form-control(type="text", name="partner-number", placeholder="00-000-00", [formControl]="partnerNumberSearchControl")
+      div.form-group
+        div.i-checks.control-label([ngClass]="{'checked': filterByPayer}")
+          label
+            input(type="checkbox", name="filter_by_payer", [(ngModel)]="filterByPayer", (ngModelChange)="getList()")
+            | Költségviselő
+      div.form-group
+        div.i-checks.control-label([ngClass]="{'checked': displayDeleted}")
+          label
+            input(type="checkbox", name="display_deleted", [(ngModel)]="displayDeleted", (ngModelChange)="nullList()")
+            | Töröltek
+      div.form-group
+        div.i-checks.control-label([ngClass]="{'checked': filterBillable}")
+          label
+            input(type="checkbox", name="filter_billable", [(ngModel)]="filterBillable", (ngModelChange)="nullList()")
+            | Számlázható
+      div.form-group
+        div.i-checks.control-label([ngClass]="{'checked': filterComplete}")
+          label
+            input(type="checkbox", name="filter_complete", [(ngModel)]="filterComplete", (ngModelChange)="nullList()")
+            | Elkészült
+      div.form-group
+        button.btn.btn-primary((click)="exportToXls()") Export xls
+  div.row
+    div.col-lg-12
+      div.ibox
+        div.ibox-content
+          table.table.table-striped.sortable
+            thead
+              tr
+                th.sortable
+                  span((click)="sort('full_identifier')") Vizsgálati a.
+                    i(*ngIf="sortString !== 'full_identifier' && sortString !== '-full_identifier'").fa.fa-sort
+                    i(*ngIf="sortString == 'full_identifier'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-full_identifier'").fa.fa-sort-asc
+                th.sortable
+                  span((click)="sort('number')") Tenyészeta.
+                    i(*ngIf="sortString !== 'number' && sortString !== '-number'").fa.fa-sort
+                    i(*ngIf="sortString == 'number'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-number'").fa.fa-sort-asc
+                th.sortable
+                  span((click)="sort('name')") Megrendelő
+                    i(*ngIf="sortString !== 'name' && sortString !== '-name'").fa.fa-sort
+                    i(*ngIf="sortString == 'name'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-name'").fa.fa-sort-asc
+                th.sortable.text-center
+                  span((click)="sort('sample_arrived_at')") Beérkezés
+                    i(*ngIf="sortString !== 'sample_arrived_at' && sortString !== '-sample_arrived_at'").fa.fa-sort
+                    i(*ngIf="sortString == 'sample_arrived_at'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-sample_arrived_at'").fa.fa-sort-asc
+                th.sortable.text-center
+                  span((click)="sort('analysis_created_at')") Érkeztetve
+                    i(*ngIf="sortString !== 'analysis_created_at' && sortString !== '-analysis_created_at'").fa.fa-sort
+                    i(*ngIf="sortString == 'analysis_created_at'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-analysis_created_at'").fa.fa-sort-asc
+                th.sortable.text-center
+                  span((click)="sort('examined_at')") Levizsgálva
+                    i(*ngIf="sortString !== 'examined_at' && sortString !== '-examined_at'").fa.fa-sort
+                    i(*ngIf="sortString == 'examined_at'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-examined_at'").fa.fa-sort-asc
+                th Jk.
+                th.sortable.text-center
+                  span((click)="sort('report_approved_at')") Jk. Jóváhagyva
+                    i(*ngIf="sortString !== 'report_approved_at' && sortString !== '-report_approved_at'").fa.fa-sort
+                    i(*ngIf="sortString == 'report_approved_at'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-report_approved_at'").fa.fa-sort-asc
+                th.sortable.text-center
+                  span((click)="sort('report_sent_at')") Kiküldve
+                    i(*ngIf="sortString !== 'report_sent_at' && sortString !== '-report_sent_at'").fa.fa-sort
+                    i(*ngIf="sortString == 'report_sent_at'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-report_sent_at'").fa.fa-sort-asc
+                th.sortable.text-center
+                  span((click)="sort('billed_at')") Szla. Jóváhagyva
+                    i(*ngIf="sortString !== 'bill_approved_at' && sortString !== '-bill_approved_at'").fa.fa-sort
+                    i(*ngIf="sortString == 'bill_approved_at'").fa.fa-sort-desc
+                    i(*ngIf="sortString == '-bill_approved_at'").fa.fa-sort-asc
+                th.text-center Számlázva&nbsp;
+                  input(type="checkbox", [(ngModel)]="allBilled", (click)="billAll()")
+                th.text-center Művelet
+            tbody
+              tr(*ngFor="let analysis of response?.data", [ngClass]="{'deleted': analysis.deleted}")
+                td {{ analysis.fullIdentifier }}
+                td {{ analysis.number }}
+                td {{ analysis.name }}
+                td().text-center
+                  p(*ngIf="analysis.SampleArrivedAt")  {{ analysis.SampleArrivedAt }}
+                  a.fa.fa-external-link(*ngIf="analysis.nextStep === 'sample_arrived_at'", [routerLink]="'../analysis/' + analysis.id + '/arrival2'")
+                td().text-center
+                  p(*ngIf="analysis.AnalysisCreatedAt") {{ analysis.AnalysisCreatedAt }}
+                  a.fa.fa-external-link(*ngIf="analysis.nextStep === 'analysis_created_at'", [routerLink]="'../analysis/' + analysis.id + '/arrival2'")
+                td(*ngIf="analysis.ExaminedAt !== false", ).text-center
+                  p(*ngIf="analysis.ExaminedAt") {{ analysis.ExaminedAt }}
+                  a.fa.fa-external-link(*ngIf="analysis.nextStep === 'examined_at'", [routerLink]="'../analysis/' + analysis.id + '/results'")
+                td(*ngIf="analysis.ExaminedAt === false").text-center.text-danger
+                  i.fa.fa-times
+                td
+                  a.fa.fa-file(*ngIf="analysis.reportUrl", [routerLink]="'../analysis/' + analysis.id + '/report'")
+                td().text-center
+                  p(*ngIf="analysis.ReportApprovedAt") {{ analysis.ReportApprovedAt }}
+                  a.fa.fa-external-link(*ngIf="analysis.nextStep === 'report_approved_at'", [routerLink]="'../analysis/' + analysis.id + '/report'")
+                td(*ngIf="analysis.ReportSentAt !== false", ).text-center
+                  p(*ngIf="analysis.ReportSentAt") {{ analysis.ReportSentAt }}
+                  a.fa.fa-external-link(*ngIf="analysis.nextStep === 'report_sent_at'", [routerLink]="'../analysis/' + analysis.id + '/report-send'")
+                td(*ngIf="analysis.ReportSentAt === false").text-center.text-danger
+                  i.fa.fa-times
+                td().text-center
+                  p(*ngIf="analysis.BillApprovedAt") {{ analysis.BillApprovedAt }}
+                  a.fa.fa-external-link(*ngIf="analysis.nextStep === 'bill_approved_at'", [routerLink]="'../analysis/' + analysis.id + '/billing'")
+                td.text-center
+                  input(type="checkbox", [(ngModel)]="billArray[analysis.id]", *ngIf="analysis.BillApprovedAt && !analysis.BilledAt")
+                  span(*ngIf="analysis.BilledAt") {{analysis.BilledAt}}
+                td.text-right
+                  i.fa.fa-eye([routerLink]="'../analysis/' + analysis.id + '/arrival1'", title="vizsgálat megtekintése")
+                  i.fa.fa-clipboard((click)="copy(analysis, 'arrival')", title="fejlécadatok másolása")
+                  i.fa.fa-clone(*ngIf="canCopyArchive", [ngClass]="{'disabled': !analysis.reportUrl}", (click)="copy(analysis, 'archive')", title="ismételt jegyzőkönyv készítése archív adatokból")
+                  i.fa.fa-trash(*ngIf="canDelete && !analysis.deleted", (click)="openDeleteModal(analysis)")
+            tfoot
+              tr
+                td(colspan="12")
+                  app-pagination(*ngIf="response.meta.total_pages > 1", [elements]="response", [(page)]="page", (pageChange)="getList()")
+                  button.btn.btn-success((click)="bill()", [disabled]="!Checked") Számlázás ({{ Checked }})
+

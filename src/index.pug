@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title Hotel-portál
+    base#base-url
+    script document.getElementById('base-url').href = document.location;
+
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="icon" type="image/x-icon" href="favicon.ico")
+  body.gray-bg.fixed-sidebar.fixed-nav.fixed-nav-basic.mini-navbar
+    app-root
+      div.spinner-container.gray-bg
+        include pug-includes/spinner

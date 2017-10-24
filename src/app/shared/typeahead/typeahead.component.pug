@@ -1,0 +1,7 @@
+//-
+   Created by ekemate on 2017. 03. 07..
+
+input.form-control(type="text", [placeholder]="placeholder || 'Név vagy cikkszám'", [formControl]="searchControl", (keydown)="keyUp($event)", (focusout)="focusOut()")
+ul#typeahead.typeahead.dropdown-menu(role="listbox", *ngIf="!selected")
+  li.typehead-elem(*ngFor="let item of ownItems", [ngClass]="{'active': item.active}", (click)="selectElem(item.value)")
+    a.dropdown-item {{ item.value.DisplayValue }}
