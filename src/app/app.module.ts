@@ -16,7 +16,6 @@ import {SharedVarsService} from './services/shared-vars.service';
 import {ToastService} from './services/toast.service';
 import {ModalService} from './services/modal.service';
 import {FileUploadModule} from 'ng2-file-upload';
-import {AnalysisDataService} from './main/examination-shared/analysis-data.service';
 import {PasswordReminderComponent} from './password-reminder/password-reminder.component';
 import {PasswordResetComponent} from './password-reset/password-reset.component';
 import {SharedModule} from './shared/shared.module';
@@ -48,8 +47,7 @@ import {PrintComponent} from './print/print.component';
     SpinnerService,
     SharedVarsService,
     ToastService,
-    ModalService,
-    AnalysisDataService
+    ModalService
   ],
   bootstrap: [AppComponent]
 })

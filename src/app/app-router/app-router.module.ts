@@ -32,8 +32,8 @@ import {PrintComponent} from '../print/print.component';
         },
         {
           path: '',
-          canLoad: [AuthGuardService],
-          canActivate: [AuthGuardService],
+          // canLoad: [AuthGuardService],
+          // canActivate: [AuthGuardService],
           loadChildren: '../main/main.module#MainModule',
         },
         {
