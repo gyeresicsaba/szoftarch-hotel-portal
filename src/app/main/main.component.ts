@@ -15,11 +15,11 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appVersion = appVersion;
-    this.authHttp.get('version').subscribe(resp => {
-      this.apiVersion = resp.version;
-    });
-    this.apiVersion = '0.8.0';
+    // this.appVersion = appVersion;
+    // this.authHttp.get('version').subscribe(resp => {
+    //   this.apiVersion = resp.version;
+    // });
+    // this.apiVersion = '0.8.0';
   }
 
 }

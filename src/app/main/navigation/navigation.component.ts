@@ -22,9 +22,9 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.userSubject.subscribe(user => {
-      this.user = user;
-    });
+    // this.authService.userSubject.subscribe(user => {
+    //   this.user = user;
+    // });
   }
 
   activeRoute(route: string, fullMatch = false): boolean {

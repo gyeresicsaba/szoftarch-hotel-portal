@@ -27,8 +27,8 @@ import {RcaComponent} from '../rca/rca.component';
           },
           {
             path: 'profile',
-            canLoad: [AuthGuardService],
-            canActivate: [AuthGuardService],
+            // canLoad: [AuthGuardService],
+            // canActivate: [AuthGuardService],
             component: ProfileComponent
           },
           {

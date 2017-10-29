@@ -1,1 +1,10 @@
-h1 hello rca
+div.wrapper.wrapper-content.ecommerce
+  div.panel-body
+    form.form-horizontal(role="form", #detailsForm="ngForm", (ngSubmit)="onSubmit()")
+      div.form-group
+        div([ngClass]="{'has-error': !messageField}")
+          label.col-xs-2.control-label(for="message") Üzenet:
+          div.col-xs-3
+            input#message.form-control(type="text", placeholder="Message", name="message", [(ngModel)]="messageField", #message="ngModel", required)
+      div.col-xs-5.text-right
+        button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Küldés

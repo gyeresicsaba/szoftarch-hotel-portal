@@ -15,7 +15,7 @@ import {PrintComponent} from '../print/print.component';
     RouterModule.forRoot([
         {
           path: 'login',
-          canActivate: [LoggedInGuardService],
+          // canActivate: [LoggedInGuardService],
           component: LoginComponent
         },
         {
