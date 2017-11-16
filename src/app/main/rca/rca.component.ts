@@ -14,7 +14,7 @@ export class RcaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._client = new Paho.MQTT.Client('127.0.0.1', Number(8000), 'test');
+    this._client = new Paho.MQTT.Client('127.0.0.1', Number(8000), 'controller_physicalAddress');
 
     this._client.onConnectionLost = (responseObject: Object) => {
       console.log('Connection lost.');
@@ -31,13 +31,12 @@ export class RcaComponent implements OnInit {
 
   private onConnected(): void {
     console.log('Connected to broker.');
-    this._client.subscribe('test', {});
+    this._client.subscribe('controllers', {});
   }
 
   onSubmit() {
     const message = new Paho.MQTT.Message(this.messageField);
     message.destinationName = 'test';
-    message.qos = 0;
     this._client.send(message);
   }
 }

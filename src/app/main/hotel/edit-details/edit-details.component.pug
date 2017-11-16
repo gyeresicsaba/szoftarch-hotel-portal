@@ -1,0 +1,22 @@
+div.panel-body
+  form.form-horizontal(role="form", #detailsForm="ngForm", (ngSubmit)="onSubmit()")
+    div.form-group
+      div([ngClass]="{'has-error': !hotel.name}")
+        label.col-xs-2.control-label(for="name") Név:
+        div.col-xs-8
+          input#name.form-control(type="text", name="name", [(ngModel)]="hotel.name", #name="ngModel", required)
+    div.form-group
+      div([ngClass]="{'has-error': !hotel.address}")
+        label.col-xs-2.control-label(for="address") Email:
+        div.col-xs-8
+          input#address.form-control(type="text", name="address", [(ngModel)]="hotel.address", #address="ngModel", required)
+    //div.form-group
+    //  div([ngClass]="{'has-error': !hotel.occupation}")
+    //    label.col-xs-2.control-label(for="occupation") Foglalkozás:
+    //    div.col-xs-8
+    //      input#occupation.form-control(type="text", name="occupation", [(ngModel)]="hotel.occupation", #occupation="ngModel", required)
+    div.col-lg-12.text-right(*ngIf="isNew")
+      button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Mentés
+    div.col-lg-12.text-right(*ngIf="!isNew")
+      button.btn(type="button", [routerLink]="'/hotel'") Mégsem
+      button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Módosít

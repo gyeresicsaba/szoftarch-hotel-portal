@@ -1,0 +1,22 @@
+div.wrapper.wrapper-content.ecommerce
+  div.ibox-content.m-b-sm.border-bottom
+    div.form-inline
+      div.form-group.text-right
+        a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'/hotel/add'") Új hotel
+  div.row
+    div.col-lg-12
+      div.ibox
+        div.ibox-content
+          table.table.table-striped
+            thead
+              tr
+                th.text-center Név
+                th.text-center Cím
+            tbody
+              tr(*ngFor="let hotel of response")
+                td.text-center {{ hotel.name }}
+                td.text-center {{ hotel.address }}
+                td.text-right
+                  i.fa.fa-eye([routerLink]="['../', hotel.id]")
+                  i.fa.fa-pencil([routerLink]="'../' + hotel.id + '/edit'")
+                  i.fa.fa-trash((click)="openDeleteModal(hotel)")

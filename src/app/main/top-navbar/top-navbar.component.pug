@@ -9,7 +9,6 @@ div.row.border-bottom
       ol#breadcrumb.breadcrumb
         li(*ngFor="let breadcrumb of breadcrumbs", [ngClass]="{active: activeRoute(breadcrumb.url)}")
           a([routerLink]="breadcrumb.url") {{ breadcrumb.label }}
-      span.is-demo(*ngIf="isDemo") Teszt verzió
     ul.nav.navbar-top-links.navbar-right
       li
         a#log-out((click)="authService.logOut()")

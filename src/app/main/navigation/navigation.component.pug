@@ -18,10 +18,14 @@ nav.navbar-default.navbar-static-side(role="navigation")
         a([routerLink]="'/'")
           i.fa.fa-th-large
           span.nav-label Főoldal
-      li([ngClass]="{active: activeRoute('/rca', true)}")
-        a([routerLink]="'/rca'")
+      li([ngClass]="{active: activeRoute('/hotel', false)}")
+        a([routerLink]="'/hotel'")
+          i.fa.fa-bank
+          span.nav-label Hotelek
+      li([ngClass]="{active: activeRoute('/rooms', true)}")
+        a([routerLink]="'/rooms'")
           i.fa.fa-th-large
-          span.nav-label RCA
+          span.nav-label Szobák
       //li([ngClass]="{active: activeRoute('/admin')}", *ngIf="user.IsAdmin")
       //  a([routerLink]="'/admin'")
       //    i.fa.fa-th-large

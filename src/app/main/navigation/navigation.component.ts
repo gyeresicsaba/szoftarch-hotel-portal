@@ -10,13 +10,6 @@ import {AuthService} from '../../services/auth.service';
 })
 export class NavigationComponent implements OnInit {
   user: User;
-  analysisModules = [
-    {path: 'milktoxin', name: 'Különminta'},
-    {path: 'pag', name: 'PAG'},
-    {path: 'feedtoxin', name: 'Takarmánytoxin'},
-    {path: 'mastitis', name: 'Mastitis'},
-    {path: 'tampon', name: 'Tampon'},
-  ];
 
   constructor(private router: Router, private authService: AuthService) {
   }

@@ -32,6 +32,16 @@ import {RcaComponent} from '../rca/rca.component';
             component: ProfileComponent
           },
           {
+            path: 'hotel',
+            // canLoad: [AuthGuardService],
+            // canActivate: [AuthGuardService],
+            loadChildren: '../hotel/hotel.module#HotelModule',
+            data: {
+              breadcrumb: 'Hotelek',
+              security: 'hotel'
+            },
+          },
+          {
             path: 'not-found',
             component: NotFoundComponent,
             data: {
