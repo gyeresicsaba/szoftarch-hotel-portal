@@ -10,6 +10,8 @@ import {EditComponent} from './edit/edit.component';
 import {EditDetailsComponent} from './edit-details/edit-details.component';
 import {HotelRoutingModule} from './hotel-routing/hotel-routing.module';
 import {ListResolve} from './list/list.resolve';
+import {DetailsResolve} from './details/details.resolve';
+import {EditResolve} from './edit/edit.resolve';
 
 @NgModule({
   imports: [
@@ -28,6 +30,8 @@ import {ListResolve} from './list/list.resolve';
     ListComponent
   ],
   providers: [
+    DetailsResolve,
+    EditResolve,
     ListResolve
   ]
 })

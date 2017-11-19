@@ -7,17 +7,17 @@ export class Hotel {
   price: number;
 
   constructor(raw) {
-    this.id = raw.Id;
-    this.name = raw.Name;
-    this.address = raw.Address;
-    this.numberOfStars = raw.NumberOfStars;
-    this.numberOfRooms = raw.NumberOfRooms;
-    this.price = raw.Price;
+    this.id = raw.id;
+    this.name = raw.name;
+    this.address = raw.address;
+    this.numberOfStars = raw.numberOfStars;
+    this.numberOfRooms = raw.numberOfRooms;
+    this.price = raw.price;
   }
 
   get Saveable() {
     return {
-      Id: this.id,
+      // Id: this.id,
       Name: this.name,
       Address: this.address,
       NumberOfStars: this.numberOfStars,

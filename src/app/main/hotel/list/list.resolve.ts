@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {CustomAuthHttpService} from '../../../services/custom-auth-http.service';
 import {SpinnerService} from '../../../services/spinner.service';
 import {Hotel} from '../../../models/hotel';
-import {Http} from '@angular/http';
+import {Http, Response} from '@angular/http';
 import {environment} from '../../../../environments/environment';
 
 
@@ -19,11 +19,15 @@ export class ListResolve implements Resolve<Array<Hotel>> {
 
     return this.http.get(environment.apiPrefix + 'hotel')
       .do(
-        (data) => {
-          console.log(data);
+        () => {
           this.spinner.decrementCounter('wrapper');
         }
-      ).map(item => new Hotel(item))
+      ).map((item: Response) => {
+      console.log(item);
+        const temp = item.json().map(x => new Hotel(x));
+        console.log(temp);
+        return item.json().map(x => new Hotel(x));
+      })
       .catch(
         (error) => {
           console.error(error);

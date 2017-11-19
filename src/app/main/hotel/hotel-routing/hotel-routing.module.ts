@@ -4,6 +4,9 @@ import {RouterModule} from '@angular/router';
 import {AddComponent} from '../add/add.component';
 import {EditComponent} from '../edit/edit.component';
 import {ListResolve} from '../list/list.resolve';
+import {DetailsComponent} from '../details/details.component';
+import {DetailsResolve} from '../details/details.resolve';
+import {EditResolve} from '../edit/edit.resolve';
 
 @NgModule({
   imports: [
@@ -28,21 +31,21 @@ import {ListResolve} from '../list/list.resolve';
           breadcrumb: 'Új'
         },
       },
-      // {
-      //   path: ':id',
-      //   component: DetailsComponent,
-      //   data: {
-      //     breadcrumbVar: 'currentBoxNumber'
-      //   },
-      //   resolve: {response: DetailsResolve}
-      // },
+      {
+        path: ':id',
+        component: DetailsComponent,
+        data: {
+          breadcrumbVar: 'currentHotelName'
+        },
+        resolve: {response: DetailsResolve}
+      },
       {
         path: ':id/edit',
         component: EditComponent,
         data: {
-          breadcrumbVar: 'currentBoxNumber'
+          breadcrumbVar: 'currentHotelName'
         },
-        // resolve: {response: EditResolve}
+        resolve: {response: EditResolve}
       },
     ])
   ],

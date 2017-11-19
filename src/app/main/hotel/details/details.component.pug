@@ -1,0 +1,16 @@
+div.wrapper.wrapper-content.ecommerce
+  div.ibox-content
+    div.row.vertical-align
+      div.col-xs-8.col-xl-9
+        h2
+          strong {{ hotel.name }}
+          i([routerLink]="'edit'").fa.fa-pencil
+          i.fa.fa-trash((click)="openDeleteModal()")
+    hr
+    div.row
+      div.col-xs-4
+        h3 Cím:
+        div {{ hotel.address }}
+      div.col-xs-4
+        h3 Csillagok száma:
+        div {{ hotel.numberOfCounts }}

@@ -1,0 +1,45 @@
+@import '../../../../styles/_variables';
+
+.form-group {
+  margin-bottom: 0;
+  .control-label {
+    max-width: 265px;
+  }
+}
+
+th {
+  .fa {
+    margin-left: 5px;
+  }
+
+  &.sortable span {
+    cursor: pointer;
+  }
+}
+
+td {
+  &.text-primary {
+    color: $navy;
+  }
+  .fa {
+    font-size: 18px;
+  }
+
+  &.text-right {
+    .fa {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+}
+
+.btn-circle.btn-sm {
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  font-size: 10px;
+}
+
+.hotel-star {
+  color: orange;
+}

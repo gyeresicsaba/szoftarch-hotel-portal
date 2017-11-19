@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Hotel} from '../../../models/hotel';
 import {Toast} from '../../../models/toast';
 import {BootstrapTypes} from '../../../models/bootstrap-types';
-import {Observable} from 'rxjs/Observable';
+import {Http} from '@angular/http';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-edit-details',
@@ -15,10 +16,14 @@ import {Observable} from 'rxjs/Observable';
 export class EditDetailsComponent implements OnInit {
   @Input() hotelInput: string;
   hotel;
+  starArray: Array<any> = [{name: '1', value: 1}, {name: '2', value: 2}, {name: '3', value: 3}, {
+    name: '4',
+    value: 4
+  }, {name: '5', value: 5}];
   isNew = true;
 
   constructor(private authHttp: CustomAuthHttpService, private toastService: ToastService, private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private http: Http) {
   }
 
   ngOnInit() {
@@ -31,22 +36,18 @@ export class EditDetailsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.hotel);
-    // if (this.isNew) {
-    //   this.authHttp.post('users', this.user).subscribe((response: {status: string, id: number}) => {
-    //     this.authHttp.post('users/' + response.id + '/roles', {role_ids: this.role_ids}).subscribe(() => {
-    //       this.toastService.addToast(new Toast(BootstrapTypes.success, 'Sikeres mentés!', '', 3000));
-    //       this.router.navigateByUrl('/admin/users/list');
-    //     });
-    //   });
-    // } else {
-    //   const userHttp = this.authHttp.put('users/' + this.user.id, this.user);
-    //   const rolesHttp = this.authHttp.post('users/' + this.user.id + '/roles', {role_ids: this.role_ids});
-    //
-    //   Observable.forkJoin(userHttp, rolesHttp).subscribe(() => {
-    //     this.toastService.addToast(new Toast(BootstrapTypes.success, 'Sikeres mentés!', '', 3000));
-    //   });
-    // }
+    if (this.isNew) {
+      console.log(this.hotel.Saveable);
+      this.http.post(environment.apiPrefix + 'hotel', this.hotel.Saveable).subscribe(() => {
+        this.toastService.addToast(new Toast(BootstrapTypes.success, 'Sikeres mentés!', '', 3000));
+        this.router.navigateByUrl('/hotel/list');
+      });
+    } else {
+      this.http.put(environment.apiPrefix + 'hotel/' + this.hotel.id, this.hotel).subscribe(() => {
+        this.toastService.addToast(new Toast(BootstrapTypes.success, 'Sikeres mentés!', '', 3000));
+        // this.router.navigateByUrl('/hotel/list');
+      });
+    }
   }
 
 }

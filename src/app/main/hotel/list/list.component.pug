@@ -1,7 +1,7 @@
 div.wrapper.wrapper-content.ecommerce
   div.ibox-content.m-b-sm.border-bottom
-    div.form-inline
-      div.form-group.text-right
+    div.row
+      div.col-xs-2.col-xs-offset-10
         a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'/hotel/add'") Új hotel
   div.row
     div.col-lg-12
@@ -12,10 +12,13 @@ div.wrapper.wrapper-content.ecommerce
               tr
                 th.text-center Név
                 th.text-center Cím
+                th.text-center Csillagok száma
             tbody
               tr(*ngFor="let hotel of response")
                 td.text-center {{ hotel.name }}
                 td.text-center {{ hotel.address }}
+                td.text-center
+                  i.fa.fa-star.hotel-star(*ngFor="let item of fillArray(hotel.numberOfStars)")
                 td.text-right
                   i.fa.fa-eye([routerLink]="['../', hotel.id]")
                   i.fa.fa-pencil([routerLink]="'../' + hotel.id + '/edit'")
