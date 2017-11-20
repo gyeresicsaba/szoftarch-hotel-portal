@@ -2,23 +2,21 @@ import {ActivatedRouteSnapshot, Resolve, Router} from '@angular/router';
 import {CustomAuthHttpService} from '../../../services/custom-auth-http.service';
 import {SpinnerService} from '../../../services/spinner.service';
 import {SharedVarsService} from '../../../services/shared-vars.service';
-import {Http} from '@angular/http';
 import {Hotel} from '../../../models/hotel';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
-import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class DetailsResolve implements Resolve<Hotel> {
-  constructor(private authHttp: CustomAuthHttpService, private http: Http, private spinner: SpinnerService,
+  constructor(private authHttp: CustomAuthHttpService, private spinner: SpinnerService,
               private router: Router, private sharedVars: SharedVarsService) {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Hotel> {
     this.spinner.incrementCounter('wrapper');
 
-    return this.http.get(environment.apiPrefix + 'hotel/' + route.params.id)
-      .map(data => new Hotel(data.json()))
+    return this.authHttp.get('hotel/' + route.params.id)
+      .map(data => new Hotel(data))
       .do((hotel: Hotel) => {
           this.sharedVars.setVar(route.data.breadcrumbVar, hotel.name);
           this.spinner.decrementCounter('wrapper');

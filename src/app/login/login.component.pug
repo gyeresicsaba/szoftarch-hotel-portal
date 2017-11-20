@@ -8,7 +8,7 @@ div.middle-box.text-center.loginscreen
     h4 Állattenyésztési Teljesítményvizsgáló Kft.
     form.m-t(role="form", #loginForm="ngForm", (ngSubmit)="onSubmit()", [ngClass]="{'has-error': (loginForm.submitted && loginError)}")
       div.form-group
-        input#email.form-control(type="email", placeholder="Felhasználónév", name="email", [(ngModel)]="credentials.email", #email="ngModel", required, autofocus, pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+.*$")
+        input#username.form-control(type="username", placeholder="Felhasználónév", name="username", [(ngModel)]="credentials.username", #username="ngModel", required, autofocus)
       div.form-group
         input#password.form-control(type="password", placeholder="Jelszó", name="password", [(ngModel)]="credentials.password", #password="ngModel", required)
       p.help-block(*ngIf="loginForm.submitted && loginError")

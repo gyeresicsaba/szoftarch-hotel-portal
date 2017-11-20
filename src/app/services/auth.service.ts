@@ -45,11 +45,12 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  logIn(credentials: {email: string, password: string}): Observable<Response> {
-    return this.http.post(environment.apiPrefix + 'login', credentials).do(
+  logIn(credentials: {username: string, password: string}): Observable<Response> {
+    return this.http.post(environment.apiPrefix + 'account/login', credentials).do(
       (resp) => {
-        this.setToken(resp.json().token);
-        this.getUser();
+        console.log(resp.json());
+        this.setToken(resp.json());
+        // this.getUser();
       },
       (err) => console.error(err),
     );
