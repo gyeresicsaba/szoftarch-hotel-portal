@@ -5,7 +5,7 @@ div.middle-box.text-center.loginscreen
   div
     div.logo-container
       img.logo(src="assets/images/logo.png")
-    h4 Állattenyésztési Teljesítményvizsgáló Kft.
+    h4 Hotel portál
     form.m-t(role="form", #loginForm="ngForm", (ngSubmit)="onSubmit()", [ngClass]="{'has-error': (loginForm.submitted && loginError)}")
       div.form-group
         input#username.form-control(type="username", placeholder="Felhasználónév", name="username", [(ngModel)]="credentials.username", #username="ngModel", required, autofocus)
