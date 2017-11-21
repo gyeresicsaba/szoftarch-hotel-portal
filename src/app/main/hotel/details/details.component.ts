@@ -23,6 +23,10 @@ export class DetailsComponent implements OnInit {
     })
   }
 
+  fillArray(count: number): Array<any> {
+    return Array(count).fill(1);
+  }
+
   openDeleteModal() {
     this.modalService.open(new Modal('Törlés', 'Biztos törölni szeretné?', [{
       text: 'Törlés',

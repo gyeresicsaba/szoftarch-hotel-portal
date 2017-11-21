@@ -1,0 +1,17 @@
+div.panel-body
+  form.form-horizontal(role="form", #detailsForm="ngForm", (ngSubmit)="onSubmit()")
+    div.form-group
+      div([ngClass]="{'has-error': !room.capacity}")
+        label.col-xs-2.control-label(for="capacity") Férőhelyek száma:
+        div.col-xs-8
+          input#capacity.form-control(type="number", name="capacity", [(ngModel)]="room.capacity", #capacity="ngModel", required)
+    div.form-group
+      div([ngClass]="{'has-error': !room.price}")
+        label.col-xs-2.control-label(for="price") Ár:
+        div.col-xs-8
+          input#price.form-control(type="number", name="price", [(ngModel)]="room.price", #price="ngModel", required)
+    div.col-lg-12.text-right(*ngIf="isNew")
+      button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Mentés
+    div.col-lg-12.text-right(*ngIf="!isNew")
+      button.btn(type="button", [routerLink]="'/hotel'") Mégsem
+      button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Módosít

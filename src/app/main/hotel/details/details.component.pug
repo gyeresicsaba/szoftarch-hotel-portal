@@ -1,11 +1,13 @@
 div.wrapper.wrapper-content.ecommerce
   div.ibox-content
     div.row.vertical-align
-      div.col-xs-8.col-xl-9
+      div.col-xs-10
         h2
           strong {{ hotel.name }}
           i([routerLink]="'edit'").fa.fa-pencil
           i.fa.fa-trash((click)="openDeleteModal()")
+      div.col-xs-2
+        a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'rooms/add'") Szoba hozzáadása
     hr
     div.row
       div.col-xs-4
@@ -13,4 +15,21 @@ div.wrapper.wrapper-content.ecommerce
         div {{ hotel.address }}
       div.col-xs-4
         h3 Csillagok száma:
-        div {{ hotel.numberOfCounts }}
+        i.fa.fa-star.hotel-star(*ngFor="let item of fillArray(hotel.numberOfStars)")
+    hr
+    div.row
+      div.col-lg-12
+        h3 Szobák
+      div.col-lg-12
+        table.table.table-striped
+          thead
+            tr
+              th.text-center Szobaszám
+              th.text-center Férőhelyek
+              th.text-center Szabad
+          tbody
+            tr(*ngFor="let room of hotel.rooms")
+              td.text-center {{ room.id }}
+              td.text-center {{ room.capacity }}
+              td.text-center([ngClass]="{'text-primary': !room.isReserved, 'text-danger': room.isReserved}")
+                i.fa([ngClass]="{'fa-check': !room.isReserved, 'fa-times': room.isReserved}")

@@ -12,8 +12,8 @@ import {BootstrapTypes} from '../../../models/bootstrap-types';
   styleUrls: ['./edit-details.component.scss']
 })
 export class EditDetailsComponent implements OnInit {
-  @Input() hotelInput: string;
-  hotel;
+  @Input() hotelInput: Hotel;
+  hotel: Hotel;
   starArray: Array<any> = [{name: '1', value: 1}, {name: '2', value: 2}, {name: '3', value: 3}, {
     name: '4',
     value: 4

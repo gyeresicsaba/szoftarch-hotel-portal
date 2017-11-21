@@ -47,6 +47,16 @@ import {EditResolve} from '../edit/edit.resolve';
         },
         resolve: {response: EditResolve}
       },
+      {
+        path: ':id/rooms',
+        // canLoad: [AuthGuardService],
+        // canActivate: [AuthGuardService],
+        loadChildren: 'app/main/hotel/rooms/rooms.module#HotelRoomsModule',
+        data: {
+          breadcrumbVar: 'currentHotelName',
+          // security: 'service'
+        },
+      }
     ])
   ],
   declarations: []
