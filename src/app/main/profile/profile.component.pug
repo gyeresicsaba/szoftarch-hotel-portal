@@ -1,27 +1,28 @@
 div.wrapper.wrapper-content.ecommerce
-  div.panel-body
+  div.ibox-content.m-b-sm
     form.form-horizontal(role="form", #detailsForm="ngForm", (ngSubmit)="onSubmit()")
       div.form-group
         div([ngClass]="{'has-error': !oldPassword}")
-          label.col-xs-2.control-label(for="oldPass") Régi jelszó:
-          div.col-xs-3
+          label.col-sm-2.control-label(for="oldPass") Régi jelszó:
+          div.col-sm-8
             input#oldPass.form-control(type="password", placeholder="Régi jelszó", name="oldPass", [(ngModel)]="oldPassword", #oldPass="ngModel", required)
       div.form-group
         div([ngClass]="{'has-error': !newPassword}")
-          label.col-xs-2.control-label(for="newPass") Új jelszó:
-          div.col-xs-3
+          label.col-sm-2.control-label(for="newPass") Új jelszó:
+          div.col-sm-8
             input#newPass.form-control(type="password", placeholder="Új jelszó", name="newPass", [(ngModel)]="newPassword", #newPass="ngModel", required)
       div.form-group
         div([ngClass]="{'has-error': !confirmPassword}")
-          label.col-xs-2.control-label(for="confirmPass") Jelszó megerősítése:
-          div.col-xs-3
+          label.col-sm-2.control-label(for="confirmPass") Jelszó megerősítése:
+          div.col-sm-8
             input#confirmPass.form-control(type="password", placeholder="Jelszó megerősítése", name="confirmPass", [(ngModel)]="confirmPassword", #confirmPass="ngModel", required)
       div.row
-        div.col-xs-5.text-center
+        div.col-sm-12.text-center
           p.text-danger(*ngIf="loginError")
             span A két jelszó nem egyezik!
           p.text-danger(*ngIf="postError")
             span Régi jelszó nem megfelelő, vagy szerver probléma!
-      div.col-xs-5.text-right
-        button.btn(type="button", [routerLink]="''") Mégsem
-        button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Módosít
+      div.row
+        div.col-sm-12.text-right
+          button.btn(type="button", [routerLink]="'/admin'") Mégsem
+          button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Módosít

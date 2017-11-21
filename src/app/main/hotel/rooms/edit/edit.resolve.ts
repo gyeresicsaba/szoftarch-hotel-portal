@@ -15,7 +15,7 @@ export class EditResolve implements Resolve<Room> {
   resolve(route: ActivatedRouteSnapshot): Observable<Room> {
     this.spinner.incrementCounter('wrapper');
 
-    return this.authHttp.get('hotel/' + route.params.id)
+    return this.authHttp.get('room/' + route.params.id)
       .map(resp => new Room(resp))
       .do(
         (hotel: Room) => {

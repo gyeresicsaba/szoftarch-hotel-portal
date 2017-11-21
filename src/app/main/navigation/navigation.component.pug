@@ -20,12 +20,12 @@ nav.navbar-default.navbar-static-side(role="navigation")
           span.nav-label Főoldal
       li([ngClass]="{active: activeRoute('/hotel', false)}")
         a([routerLink]="'/hotel'")
-          i.fa.fa-bank
+          i.fa.fa-building
           span.nav-label Hotelek
-      li([ngClass]="{active: activeRoute('/rooms', true)}")
-        a([routerLink]="'/rooms'")
-          i.fa.fa-th-large
-          span.nav-label Szobák
+      li([ngClass]="{active: activeRoute('/reservation', true)}")
+        a([routerLink]="'/reservation'")
+          i.fa.fa-plus-square
+          span.nav-label Foglalás
       //li([ngClass]="{active: activeRoute('/admin')}", *ngIf="user.IsAdmin")
       //  a([routerLink]="'/admin'")
       //    i.fa.fa-th-large

@@ -25,8 +25,8 @@ export class AuthService {
   }
 
   private getUser() {
-    this.authHttp.get('userinfo').map((data) => {
-      return new User(data.data);
+    this.authHttp.get('account/userinfo').map((data) => {
+      return new User(data);
     }).subscribe(user => {
       localStorage.setItem('user', JSON.stringify(user));
       this.user = user;
@@ -50,7 +50,7 @@ export class AuthService {
       (resp) => {
         console.log(resp.json());
         this.setToken(resp.json());
-        // this.getUser();
+        this.getUser();
       },
       (err) => console.error(err),
     );

@@ -43,4 +43,22 @@ export class DetailsComponent implements OnInit {
       this.router.navigateByUrl('/hotel');
     });
   }
+
+  openRoomDeleteModal(room) {
+    this.modalService.open(new Modal('Törlés', 'Biztos törölni szeretné?', [{
+      text: 'Törlés',
+      classes: 'btn-danger',
+      callback: () => {
+        this.modalService.close();
+        this.deleteRoom(room);
+      }
+    }]));
+  }
+
+  private deleteRoom(room) {
+    this.authHttp.delete('room/' + room.id).subscribe(() => {
+      const index = this.hotel.rooms.indexOf(room);
+      this.hotel.rooms.splice(index, 1);
+    });
+  }
 }

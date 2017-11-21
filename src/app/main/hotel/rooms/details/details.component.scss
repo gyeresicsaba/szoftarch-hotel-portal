@@ -1,0 +1,29 @@
+@import '../../../../../styles/_variables';
+
+h2 {
+  .fa {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+}
+
+td {
+  &.text-primary {
+    color: $navy;
+  }
+  .fa {
+    font-size: 18px;
+  }
+
+  &.text-right {
+    .fa {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+}
+
+.hotel-star {
+  color: orange;
+}
+

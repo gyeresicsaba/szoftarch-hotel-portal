@@ -1,0 +1,19 @@
+div.wrapper.wrapper-content.ecommerce
+  div.ibox-content
+    div.row.vertical-align
+      div.col-xs-10
+        h2
+          strong {{ room.id }}.szoba
+          i([routerLink]="'edit'").fa.fa-pencil
+          i.fa.fa-trash((click)="openDeleteModal()")
+    hr
+    div.row
+      div.col-xs-4
+        h3 Férőhelyek száma:
+        div {{ room.capacity }}
+      div.col-xs-4
+        h3 Ár:
+        div {{ room.price }} Ft/éj/fő
+      //div.col-xs-4
+        h3 Csillagok száma:
+        i.fa.fa-star.hotel-star(*ngFor="let item of fillArray(hotel.numberOfStars)")

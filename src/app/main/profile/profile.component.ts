@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     if (this.newPassword === this.confirmPassword) {
-      this.http.post('password', {
+      this.http.post('account/password', {
         'password': this.oldPassword,
         'new_password': this.newPassword
       }).subscribe(

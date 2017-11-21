@@ -5,7 +5,7 @@ export class Hotel {
   name: string;
   address: string;
   numberOfStars: number;
-  numberOfRooms: number;
+  numberOfRooms = 0;
   rooms: Array<Room>;
 
   constructor(raw) {
@@ -13,9 +13,9 @@ export class Hotel {
     this.name = raw.name;
     this.address = raw.address;
     this.numberOfStars = raw.numberOfStars;
-    this.numberOfRooms = raw.numberOfRooms;
     if (raw.rooms) {
       this.rooms = raw.rooms.map(x => new Room(x));
+      this.numberOfRooms = this.rooms.length;
     }
   }
 

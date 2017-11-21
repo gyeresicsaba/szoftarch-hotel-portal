@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Room} from '../../../../models/room';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Modal} from '../../../../models/modal';
+import {ModalService} from '../../../../services/modal.service';
+import {CustomAuthHttpService} from '../../../../services/custom-auth-http.service';
 
 @Component({
   selector: 'app-details',
@@ -10,7 +13,8 @@ import {ActivatedRoute} from '@angular/router';
 export class DetailsComponent implements OnInit {
   room: Room;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private modalService: ModalService,
+              private authHttp: CustomAuthHttpService, private router: Router) {
   }
 
   ngOnInit() {
@@ -19,4 +23,20 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  openDeleteModal() {
+    this.modalService.open(new Modal('Törlés', 'Biztos törölni szeretné?', [{
+      text: 'Törlés',
+      classes: 'btn-danger',
+      callback: () => {
+        this.modalService.close();
+        this.deleteHotel();
+      }
+    }]));
+  }
+
+  private deleteHotel() {
+    this.authHttp.delete('room/' + this.room.id).subscribe(() => {
+      this.router.navigateByUrl('/hotel/' + this.route.snapshot.parent.params.id);
+    });
+  }
 }
