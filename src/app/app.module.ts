@@ -16,18 +16,14 @@ import {SharedVarsService} from './services/shared-vars.service';
 import {ToastService} from './services/toast.service';
 import {ModalService} from './services/modal.service';
 import {FileUploadModule} from 'ng2-file-upload';
-import {PasswordReminderComponent} from './password-reminder/password-reminder.component';
-import {PasswordResetComponent} from './password-reset/password-reset.component';
 import {SharedModule} from './shared/shared.module';
-import {PrintComponent} from './print/print.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PasswordReminderComponent,
-    PasswordResetComponent,
-    PrintComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

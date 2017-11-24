@@ -11,4 +11,3 @@ div.middle-box.text-center.loginscreen
       p.help-block(*ngIf="loginForm.submitted && loginError")
         span A megadott felhasználónév vagy jelszó helytelen!
       button.btn.btn-primary.block.full-width.m-b(type="submit", [disabled]="loginForm.invalid") Bejelentkezés
-      a([routerLink]="'/register'") Regisztráció
