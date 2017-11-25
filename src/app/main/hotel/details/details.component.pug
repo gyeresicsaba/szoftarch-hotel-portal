@@ -1,44 +1,52 @@
 div.wrapper.wrapper-content.ecommerce
-  div.ibox-content
-    div.row.vertical-align
-      div.col-xs-10
-        h2
-          strong {{ hotel.name }}
-          i([routerLink]="'edit'").fa.fa-pencil
-          i.fa.fa-trash((click)="openDeleteModal()")
-      div.col-xs-2
-        a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'rooms/add'") Szoba hozzáadása
-    hr
-    div.row
-      div.col-xs-4
-        h3 Cím:
-        div {{ hotel.address }}
-      div.col-xs-4
-        h3 Csillagok száma:
-        i.fa.fa-star.hotel-star(*ngFor="let item of fillArray(hotel.numberOfStars)")
-      div.col-xs-4
-        h3 Szobák száma:
-        div {{ hotel.numberOfRooms }} darab
-    hr
-    div.row
-      div.col-lg-12
-        h3 Szobák
-      div.col-lg-12
-        table.table.table-striped
-          thead
-            tr
-              th.text-center Szobaszám
-              th.text-center Férőhelyek
-              th.text-center Ár
-              th.text-center Szabad
-          tbody
-            tr(*ngFor="let room of hotel.rooms")
-              td.text-center {{ room.id }}.
-              td.text-center {{ room.capacity }} Fő
-              td.text-center {{ room.price }} Ft/éj/fő
-              td.text-center([ngClass]="{'text-primary': !room.isReserved, 'text-danger': room.isReserved}")
-                i.fa([ngClass]="{'fa-check': !room.isReserved, 'fa-times': room.isReserved}")
-              td.text-right
-                i.fa.fa-eye([routerLink]="'rooms/' + room.id")
-                i.fa.fa-pencil([routerLink]="'rooms/' + room.id + '/edit'")
-                i.fa.fa-trash((click)="openRoomDeleteModal(room)")
+  div.row
+    div.col-xs-9
+      div.ibox.float-e-margins
+        div.ibox-content
+          div.row
+            div.col-xs-10
+              h2
+                strong {{ hotel.name }}
+                i([routerLink]="'edit'").fa.fa-pencil
+                i.fa.fa-trash((click)="openDeleteModal()")
+            div.col-xs-2
+              a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'rooms/add'") Szoba hozzáadása
+          hr
+          div.row
+            div.col-xs-4
+              h3 Cím:
+              div {{ hotel.address }}
+            div.col-xs-4
+              h3 Csillagok száma:
+              i.fa.fa-star.hotel-star(*ngFor="let item of fillArray(hotel.numberOfStars)")
+            div.col-xs-4
+              h3 Szobák száma:
+              div {{ hotel.numberOfRooms }} darab
+    div.col-xs-3
+      div.ibox.float-e-margins
+        div.ibox-content
+          agm-map([latitude]="lat", [longitude]="lng")
+            agm-marker([latitude]="lat", [longitude]="lng")
+  div.row
+    div.col-lg-12
+      div.ibox
+        div.ibox-content.m-b-sm
+          h3 Szobák
+          table.table.table-striped
+            thead
+              tr
+                th.text-center Szobaszám
+                th.text-center Férőhelyek
+                th.text-center Ár
+                th.text-center Szabad
+            tbody
+              tr(*ngFor="let room of hotel.rooms")
+                td.text-center {{ room.id }}.
+                td.text-center {{ room.capacity }} Fő
+                td.text-center {{ room.price }} Ft/éj/fő
+                td.text-center([ngClass]="{'text-primary': !room.isReserved, 'text-danger': room.isReserved}")
+                  i.fa([ngClass]="{'fa-check': !room.isReserved, 'fa-times': room.isReserved}")
+                td.text-right
+                  i.fa.fa-eye([routerLink]="'rooms/' + room.id")
+                  i.fa.fa-pencil([routerLink]="'rooms/' + room.id + '/edit'")
+                  i.fa.fa-trash((click)="openRoomDeleteModal(room)")

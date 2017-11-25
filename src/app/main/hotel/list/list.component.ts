@@ -4,6 +4,11 @@ import {Hotel} from '../../../models/hotel';
 import {ModalService} from '../../../services/modal.service';
 import {Modal} from '../../../models/modal';
 import {CustomAuthHttpService} from '../../../services/custom-auth-http.service';
+import {FormControl} from '@angular/forms';
+import * as moment from 'moment';
+import {SearchObject} from '../../../models/searchObject';
+import {IMyOptions} from 'mydatepicker';
+import {PickedDate} from '../../../models/picked-date';
 
 @Component({
   selector: 'app-list',
@@ -12,12 +17,40 @@ import {CustomAuthHttpService} from '../../../services/custom-auth-http.service'
 })
 export class ListComponent implements OnInit {
   response: Array<Hotel> = [];
+  searchControl = new FormControl();
+  searchObject: SearchObject;
+  starArray: Array<any> = [{name: '1', value: 1}, {name: '2', value: 2}, {name: '3', value: 3}, {
+    name: '4',
+    value: 4
+  }, {name: '5', value: 5}];
+
+  private startDateString: string;
+  private endDateString: string;
+  startDateModel: {date: PickedDate | {}} = {date: {}};
+  endDateModel: {date: PickedDate | {}} = {date: {}};
+  startDatePickerOptions: IMyOptions = {
+    height: '28px',
+    selectionTxtFontSize: '14px',
+    editableDateField: false,
+    showClearDateBtn: false,
+    openSelectorOnInputClick: true,
+    width: '125px'
+  };
+  endDatePickerOptions: IMyOptions = {
+    height: '28px',
+    selectionTxtFontSize: '14px',
+    editableDateField: false,
+    showClearDateBtn: false,
+    openSelectorOnInputClick: true,
+    width: '125px'
+  };
 
   constructor(private route: ActivatedRoute, private modalService: ModalService,
               private authHttp: CustomAuthHttpService) {
   }
 
   ngOnInit() {
+    this.searchObject = new SearchObject({});
     this.route.data.subscribe((data) => {
       this.response = data.response;
     });

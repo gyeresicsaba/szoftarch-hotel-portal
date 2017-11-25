@@ -1,7 +1,5 @@
-/**
- * Created by ekemate on 2017. 02. 23..
- */
 import {Subject} from 'rxjs/Rx';
+
 export class MockRouter {
   navigateByUrl = jasmine.createSpy('navigateByUrl');
   navigate = jasmine.createSpy('navigate');

@@ -2,8 +2,12 @@
 
 .form-group {
   margin-bottom: 0;
+  padding-right: 10px;
+
   .control-label {
     max-width: 265px;
+    padding-right: 10px;
+    padding-left: 43px;
   }
 }
 
@@ -33,11 +37,25 @@ td {
   }
 }
 
+my-date-picker {
+  display: block;
+  vertical-align: middle;
+  //width: 10%;
+
+  /deep/ .mydp {
+    width: 100% !important;
+  }
+}
+
 .btn-circle.btn-sm {
   width: 20px;
   height: 20px;
   padding: 2px;
   font-size: 10px;
+}
+
+.start-date {
+  margin-left: 40px;
 }
 
 .hotel-star {

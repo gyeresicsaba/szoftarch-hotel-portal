@@ -1,6 +1,3 @@
-/**
- * Created by ekemate on 2017. 02. 23..
- */
 export class PaginationMeta {
   count: number;
   current_page: number;

@@ -3,6 +3,27 @@ div.wrapper.wrapper-content.ecommerce
     div.row
       div.col-xs-2.col-xs-offset-10
         a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'/hotel/add'") Új hotel
+    hr
+    div.row
+      div.col-xs-8.form-inline
+        div.form-group
+          label.control-label(for="numberOfStars") Csillagok száma:
+          select.form-control(name="numberOfStars", [(ngModel)]="searchObject.numberOfStars", #numberOfStars="ngModel")
+            option#numberOfStars([ngValue]="item.value", *ngFor="let item of starArray") {{ item.name }}
+        div.form-group
+          label.control-label(for="list-search") Ár:
+          input#list-search.form-control(type="number", name="list-search", [formControl]="searchControl")
+        div.form-group
+          label.control-label(for="numberOfPerson") Férőhelyek száma:
+          input#numberOfPerson.form-control(type="number", name="numberOfPerson", [(ngModel)]="searchObject.numberOfPerson", #numberOfPerson="ngModel")
+        div.form-group
+          label.control-label.start-date(for="startDate") Foglalás időpontja:
+      div.col-xs-1
+        my-date-picker#startDate.mydatepicker([options]="startDatePickerOptions", (dateChanged)="pickerStartDateChange($event)", [selDate]="startDateModel.date", [locale]="'hu'")
+      div.col-xs-1
+        my-date-picker#endDate.mydatepicker([options]="endDatePickerOptions", (dateChanged)="pickerStartDateChange($event)", [selDate]="endDateModel.date", [locale]="'hu'")
+      div.col-xs-2
+        button.btn.btn-primary.btn-block Keresés
   div.row
     div.col-lg-12
       div.ibox

@@ -42,6 +42,16 @@ import {RcaComponent} from '../rca/rca.component';
             },
           },
           {
+            path: 'reservation',
+            canLoad: [AuthGuardService],
+            canActivate: [AuthGuardService],
+            loadChildren: '../reservation/reservation.module#ReservationModule',
+            data: {
+              breadcrumb: 'Foglalások',
+              security: 'reservation'
+            },
+          },
+          {
             path: 'not-found',
             component: NotFoundComponent,
             data: {

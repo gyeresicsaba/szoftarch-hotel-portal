@@ -1,6 +1,3 @@
-/**
- * Created by ekemate on 2017. 03. 03..
- */
 import {BootstrapTypes} from './bootstrap-types';
 
 export class Toast {

@@ -1,6 +1,3 @@
-/**
- * Created by ekemate on 2017. 03. 03..
- */
 
 type BootstrapString = 'success' | 'warning' | 'info' | 'error';
 export class BootstrapTypes {

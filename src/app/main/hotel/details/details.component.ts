@@ -4,6 +4,7 @@ import {Hotel} from '../../../models/hotel';
 import {Modal} from '../../../models/modal';
 import {ModalService} from '../../../services/modal.service';
 import {CustomAuthHttpService} from '../../../services/custom-auth-http.service';
+import {Http} from '@angular/http';
 
 @Component({
   selector: 'app-details',
@@ -12,15 +13,27 @@ import {CustomAuthHttpService} from '../../../services/custom-auth-http.service'
 })
 export class DetailsComponent implements OnInit {
   hotel: Hotel;
+  lat = 51.678418;
+  lng = 7.809007;
 
   constructor(private route: ActivatedRoute, private modalService: ModalService,
-              private authHttp: CustomAuthHttpService, private router: Router) {
+              private authHttp: CustomAuthHttpService, private router: Router, private http: Http) {
   }
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.hotel = data.response;
-    })
+    });
+
+    this.getLocation(this.hotel.address);
+  }
+
+  getLocation(address: string) {
+    return this.http.get('http://maps.google.com/maps/api/geocode/json?address=' + address + 'CA&sensor=false')
+      .subscribe((res) => {
+        this.lat = res.json().results[0].geometry.location.lat;
+        this.lng = res.json().results[0].geometry.location.lng;
+      });
   }
 
   fillArray(count: number): Array<any> {

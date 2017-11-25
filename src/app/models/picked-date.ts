@@ -1,6 +1,3 @@
-/**
- * Created by ekemate on 2017. 03. 07..
- */
 import * as moment from 'moment';
 
 /**

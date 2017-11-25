@@ -1,6 +1,3 @@
-/**
- * Created by ekemate on 2017. 03. 06..
- */
 export class Modal {
   title: string;
   message: string;

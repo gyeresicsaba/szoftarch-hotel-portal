@@ -1,10 +1,7 @@
-/**
- * Created by ekemate on 2017. 02. 17..
- */
 import {ITypeAheadElement} from './typeahead';
 
 export class User implements ITypeAheadElement {
-  id: number;
+  id: string;
   email: string;
   name: string;
   modules: Array<{ [name: string]: string[] }>;

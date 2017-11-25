@@ -1,6 +1,3 @@
-/**
- * Created by ekemate on 2017. 02. 23..
- */
 import {PaginationMeta} from './pagination-meta';
 
 export class PaginatedResponse<T> {

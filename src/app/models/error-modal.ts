@@ -1,6 +1,3 @@
-/**
- * Created by ekemate on 2017. 04. 11..
- */
 import {Modal} from './modal';
 
 export class ErrorModal extends Modal {

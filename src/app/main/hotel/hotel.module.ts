@@ -12,6 +12,7 @@ import {HotelRoutingModule} from './hotel-routing/hotel-routing.module';
 import {ListResolve} from './list/list.resolve';
 import {DetailsResolve} from './details/details.resolve';
 import {EditResolve} from './edit/edit.resolve';
+import {AgmCoreModule} from '@agm/core';
 
 @NgModule({
   imports: [
@@ -20,7 +21,10 @@ import {EditResolve} from './edit/edit.resolve';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDnvitTbhL_hnZMhLpebM69PdyDXzqSw0E'
+    })
   ],
   declarations: [
     AddComponent,
