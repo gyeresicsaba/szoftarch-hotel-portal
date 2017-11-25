@@ -1,5 +1,2 @@
-//-
-   Created by ekemate on 2017. 03. 03..
-
 div#toast-container.toast-top-right(role="alert")
   app-toast(*ngFor="let toast of toasts | toastFilter", [toast]="toast", (hide)="hide(toast)")

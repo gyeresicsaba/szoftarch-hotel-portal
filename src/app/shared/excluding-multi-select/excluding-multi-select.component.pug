@@ -1,6 +1,3 @@
-//
-   Created by csoma on 2017. 04. 11..
-
 div.multiselect-container.form-control((click)="isOpen = true")
   div.selected-items(*ngIf="!showCounterOnly")
     span(*ngFor="let selectedItem of selectedItems; let isLast = last;") {{ selectedItem }}
