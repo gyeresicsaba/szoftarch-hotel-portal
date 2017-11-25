@@ -9,6 +9,7 @@ import {ReservationRoutingModule} from './reservation-routing/reservation-routin
 import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {EditResolve} from './edit/edit.resolve';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     EditDetailsComponent
   ],
   providers: [
+    EditResolve,
     ListResolve
   ]
 })

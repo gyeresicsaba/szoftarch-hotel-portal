@@ -1,0 +1,23 @@
+div.panel-body
+  form.form-horizontal(role="form", #detailsForm="ngForm", (ngSubmit)="onSubmit()")
+    //div.form-group
+    //  div([ngClass]="{'has-error': !hotel.name}")
+    //    label.col-xs-2.control-label(for="name") Név:
+    //    div.col-xs-8
+    //      input#name.form-control(type="text", name="name", [(ngModel)]="hotel.name", #name="ngModel", required)
+    //div.form-group
+    //  div([ngClass]="{'has-error': !hotel.address}")
+    //    label.col-xs-2.control-label(for="address") Cím:
+    //    div.col-xs-8
+    //      input#address.form-control(type="text", name="address", [(ngModel)]="hotel.address", #address="ngModel", required)
+    //div.form-group
+    //  div([ngClass]="{'has-error': !hotel.numberOfStars}")
+    //    label.col-xs-2.control-label(for="numberOfStars") Csillagok száma:
+    //    div.col-xs-8
+    //      select.form-control(name="numberOfStars", [(ngModel)]="hotel.numberOfStars", #numberOfStars="ngModel")
+    //        option#numberOfStars([ngValue]="item.value", *ngFor="let item of starArray") {{ item.name }}
+    div.col-lg-12.text-right(*ngIf="isNew")
+      button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Mentés
+    div.col-lg-12.text-right(*ngIf="!isNew")
+      button.btn(type="button", [routerLink]="'/hotel'") Mégsem
+      button.btn.btn-primary(type="submit", [disabled]="detailsForm.invalid") Módosít

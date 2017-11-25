@@ -2,6 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {ListComponent} from '../list/list.component';
 import {ListResolve} from '../list/list.resolve';
+import {EditResolve} from '../edit/edit.resolve';
+import {EditComponent} from '../edit/edit.component';
 
 @NgModule({
   imports: [
@@ -34,14 +36,14 @@ import {ListResolve} from '../list/list.resolve';
       //   },
       //   resolve: {response: DetailsResolve}
       // },
-      // {
-      //   path: ':id/edit',
-      //   component: EditComponent,
-      //   data: {
-      //     breadcrumbVar: 'currentHotelName'
-      //   },
-      //   resolve: {response: EditResolve}
-      // },
+      {
+        path: ':id/edit',
+        component: EditComponent,
+        data: {
+          breadcrumbVar: 'currentHotelName'
+        },
+        resolve: {response: EditResolve}
+      },
     ])
   ],
   declarations: []

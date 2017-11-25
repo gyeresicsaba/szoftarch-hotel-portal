@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Reservation} from '../../../models/reservation';
 
 @Component({
   selector: 'app-edit-details',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-details.component.scss']
 })
 export class EditDetailsComponent implements OnInit {
+  @Input() reservationInput?: Reservation;
+  reservation: Reservation;
+  isNew = true;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    if (this.reservationInput) {
+      this.reservation = this.reservationInput;
+      this.isNew = false;
+    } else {
+      this.reservation = new Reservation({});
+    }
   }
 
 }
