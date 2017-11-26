@@ -5,7 +5,6 @@ import {MainComponent} from '../main.component';
 import {AuthGuardService} from '../../services/auth-guard.service';
 import {NotFoundComponent} from '../../shared/not-found/not-found.component';
 import {ProfileComponent} from '../profile/profile.component';
-import {RcaComponent} from '../rca/rca.component';
 
 @NgModule({
   imports: [
@@ -20,10 +19,6 @@ import {RcaComponent} from '../rca/rca.component';
             data: {
               breadcrumb: 'Főoldal'
             },
-          },
-          {
-            path: 'rca',
-            component: RcaComponent
           },
           {
             path: 'profile',

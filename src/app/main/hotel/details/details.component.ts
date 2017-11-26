@@ -5,6 +5,7 @@ import {Modal} from '../../../models/modal';
 import {ModalService} from '../../../services/modal.service';
 import {CustomAuthHttpService} from '../../../services/custom-auth-http.service';
 import {Http} from '@angular/http';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-details',
@@ -17,7 +18,8 @@ export class DetailsComponent implements OnInit {
   lng = 7.809007;
 
   constructor(private route: ActivatedRoute, private modalService: ModalService,
-              private authHttp: CustomAuthHttpService, private router: Router, private http: Http) {
+              private authHttp: CustomAuthHttpService, private router: Router, private http: Http,
+              private authService: AuthService) {
   }
 
   ngOnInit() {

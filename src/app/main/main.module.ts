@@ -13,7 +13,6 @@ import {CanAccessPipe} from '../filters/can-access.pipe';
 import {ProfileComponent} from './profile/profile.component';
 import {FormsModule} from '@angular/forms';
 import {ErrorModalComponent} from './error-modal/error-modal.component';
-import {RcaComponent} from './rca/rca.component';
 
 @NgModule({
   imports: [
@@ -32,8 +31,7 @@ import {RcaComponent} from './rca/rca.component';
     ModalComponent,
     CanAccessPipe,
     ProfileComponent,
-    ErrorModalComponent,
-    RcaComponent
+    ErrorModalComponent
   ],
 })
 export class MainModule {

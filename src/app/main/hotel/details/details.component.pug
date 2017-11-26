@@ -7,8 +7,8 @@ div.wrapper.wrapper-content.ecommerce
             div.col-xs-10
               h2
                 strong {{ hotel.name }}
-                i([routerLink]="'edit'").fa.fa-pencil
-                i.fa.fa-trash((click)="openDeleteModal()")
+                i(*ngIf="authService.user.IsAdmin", [routerLink]="'edit'").fa.fa-pencil
+                i.fa.fa-trash(*ngIf="authService.user.IsAdmin", (click)="openDeleteModal()")
             div.col-xs-2
               a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'rooms/add'") Szoba hozzáadása
           hr
@@ -45,5 +45,5 @@ div.wrapper.wrapper-content.ecommerce
                 td.text-center {{ room.price }} Ft/éj/fő
                 td.text-right
                   i.fa.fa-eye([routerLink]="'rooms/' + room.id")
-                  i.fa.fa-pencil([routerLink]="'rooms/' + room.id + '/edit'")
-                  i.fa.fa-trash((click)="openRoomDeleteModal(room)")
+                  i.fa.fa-pencil(*ngIf="authService.user.IsAdmin", [routerLink]="'rooms/' + room.id + '/edit'")
+                  i.fa.fa-trash(*ngIf="authService.user.IsAdmin", (click)="openRoomDeleteModal(room)")

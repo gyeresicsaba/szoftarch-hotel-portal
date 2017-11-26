@@ -6,9 +6,10 @@ import {Modal} from '../../../models/modal';
 import {CustomAuthHttpService} from '../../../services/custom-auth-http.service';
 import {FormControl} from '@angular/forms';
 import {SearchObject} from '../../../models/searchObject';
-import {IMyOptions} from 'mydatepicker';
+import {IMyDateModel, IMyOptions} from 'mydatepicker';
 import {PickedDate} from '../../../models/picked-date';
 import {AuthService} from '../../../services/auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-list',
@@ -26,8 +27,8 @@ export class ListComponent implements OnInit {
 
   private startDateString: string;
   private endDateString: string;
-  startDateModel: {date: PickedDate | {}} = {date: {}};
-  endDateModel: {date: PickedDate | {}} = {date: {}};
+  startDateModel: { date: PickedDate | {} } = {date: {}};
+  endDateModel: { date: PickedDate | {} } = {date: {}};
   startDatePickerOptions: IMyOptions = {
     height: '28px',
     selectionTxtFontSize: '14px',
@@ -78,4 +79,19 @@ export class ListComponent implements OnInit {
     });
   }
 
+  pickerStartDateChange(event: IMyDateModel) {
+    this.searchObject.checkIn = moment(event.jsdate);
+  }
+
+  pickerEndDateChange(event: IMyDateModel) {
+    this.searchObject.checkOut = moment(event.jsdate);
+  }
+
+  search() {
+    this.authHttp.get('hotel/stars=' + this.searchObject.numberOfStars + ',price=' + this.searchObject.price +
+      ',people=' + this.searchObject.numberOfPerson + ',checkIn=' + this.searchObject.checkIn +
+      ',checkOut=' + this.searchObject.checkOut).subscribe((data) => {
+      this.response = data.map(x => new Hotel(x));
+    });
+  }
 }

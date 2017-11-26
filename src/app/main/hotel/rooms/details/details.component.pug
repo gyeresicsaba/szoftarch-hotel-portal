@@ -4,8 +4,8 @@ div.wrapper.wrapper-content.ecommerce
       div.col-xs-10
         h2
           strong {{ room.id }}.szoba
-          i([routerLink]="'edit'").fa.fa-pencil
-          i.fa.fa-trash((click)="openDeleteModal()")
+          i(*ngIf="authService.user.IsAdmin", [routerLink]="'edit'").fa.fa-pencil
+          i.fa.fa-trash(*ngIf="authService.user.IsAdmin", (click)="openDeleteModal()")
     hr
     div.row
       div.col-xs-4

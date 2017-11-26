@@ -21,9 +21,9 @@ div.wrapper.wrapper-content.ecommerce
       div.col-xs-1
         my-date-picker#startDate.mydatepicker([options]="startDatePickerOptions", (dateChanged)="pickerStartDateChange($event)", [selDate]="startDateModel.date", [locale]="'hu'")
       div.col-xs-1
-        my-date-picker#endDate.mydatepicker([options]="endDatePickerOptions", (dateChanged)="pickerStartDateChange($event)", [selDate]="endDateModel.date", [locale]="'hu'")
+        my-date-picker#endDate.mydatepicker([options]="endDatePickerOptions", (dateChanged)="pickerEndDateChange($event)", [selDate]="endDateModel.date", [locale]="'hu'")
       div.col-xs-2
-        button.btn.btn-primary.btn-block Keresés
+        button.btn.btn-primary.btn-block((click)="search()") Keresés
   div.row
     div.col-lg-12
       div.ibox
