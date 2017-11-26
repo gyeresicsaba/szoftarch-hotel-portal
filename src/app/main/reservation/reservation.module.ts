@@ -10,6 +10,9 @@ import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EditResolve} from './edit/edit.resolve';
+import {EditDetailsResolve} from './edit-details/edit-details.resolve';
+import {DetailsComponent} from './details/details.component';
+import {DetailsResolve} from './details/details.resolve';
 
 @NgModule({
   imports: [
@@ -24,10 +27,13 @@ import {EditResolve} from './edit/edit.resolve';
     ListComponent,
     AddComponent,
     EditComponent,
-    EditDetailsComponent
+    EditDetailsComponent,
+    DetailsComponent
   ],
   providers: [
+    DetailsResolve,
     EditResolve,
+    EditDetailsResolve,
     ListResolve
   ]
 })

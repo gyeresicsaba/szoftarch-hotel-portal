@@ -34,7 +34,6 @@ export class EditDetailsComponent implements OnInit {
 
   onSubmit() {
     if (this.isNew) {
-      console.log(this.hotel.Saveable);
       this.authHttp.post('hotel', this.hotel.Saveable).subscribe(() => {
         this.toastService.addToast(new Toast(BootstrapTypes.success, 'Sikeres mentés!', '', 3000));
         this.router.navigateByUrl('/hotel/list');
@@ -42,7 +41,6 @@ export class EditDetailsComponent implements OnInit {
     } else {
       this.authHttp.put('hotel/' + this.hotel.id, this.hotel).subscribe(() => {
         this.toastService.addToast(new Toast(BootstrapTypes.success, 'Sikeres mentés!', '', 3000));
-        // this.router.navigateByUrl('/hotel/list');
       });
     }
   }

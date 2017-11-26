@@ -1,24 +1,24 @@
-import {Observable} from 'rxjs/Observable';
-import {Reservation} from '../../../models/reservation';
 import {Injectable} from '@angular/core';
 import {Resolve, Router} from '@angular/router';
+import {Hotel} from '../../../models/hotel';
 import {CustomAuthHttpService} from '../../../services/custom-auth-http.service';
 import {SpinnerService} from '../../../services/spinner.service';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class ListResolve implements Resolve<Array<Reservation>> {
+export class EditDetailsResolve implements Resolve<Array<Hotel>> {
   constructor(private authHttp: CustomAuthHttpService, private spinner: SpinnerService, private router: Router) {
   }
 
-  resolve(): Observable<Array<Reservation>> {
+  resolve(): Observable<Array<Hotel>> {
     this.spinner.incrementCounter('wrapper');
 
-    return this.authHttp.get('roomres')
+    return this.authHttp.get('hotel')
       .do(
         () => {
           this.spinner.decrementCounter('wrapper');
         }
-      ).map((item) => item.map(x => new Reservation(x)))
+      ).map((item) => item.map(x => new Hotel(x)))
       .catch(
         (error) => {
           console.error(error);

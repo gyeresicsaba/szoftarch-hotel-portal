@@ -4,6 +4,10 @@ import {ListComponent} from '../list/list.component';
 import {ListResolve} from '../list/list.resolve';
 import {EditResolve} from '../edit/edit.resolve';
 import {EditComponent} from '../edit/edit.component';
+import {AddComponent} from '../add/add.component';
+import {EditDetailsResolve} from '../edit-details/edit-details.resolve';
+import {DetailsComponent} from '../details/details.component';
+import {DetailsResolve} from '../details/details.resolve';
 
 @NgModule({
   imports: [
@@ -21,28 +25,29 @@ import {EditComponent} from '../edit/edit.component';
         },
         resolve: {response: ListResolve}
       },
-      // {
-      //   path: 'add',
-      //   component: AddComponent,
-      //   data: {
-      //     breadcrumb: 'Új'
-      //   },
-      // },
-      // {
-      //   path: ':id',
-      //   component: DetailsComponent,
-      //   data: {
-      //     breadcrumbVar: 'currentHotelName'
-      //   },
-      //   resolve: {response: DetailsResolve}
-      // },
+      {
+        path: 'add',
+        component: AddComponent,
+        data: {
+          breadcrumb: 'Új'
+        },
+        resolve: {hotels: EditDetailsResolve}
+      },
+      {
+        path: ':id',
+        component: DetailsComponent,
+        data: {
+          breadcrumbVar: 'currentReservationId'
+        },
+        resolve: {response: DetailsResolve}
+      },
       {
         path: ':id/edit',
         component: EditComponent,
         data: {
-          breadcrumbVar: 'currentHotelName'
+          breadcrumbVar: 'currentReservationId'
         },
-        resolve: {response: EditResolve}
+        resolve: {response: EditResolve, hotels: EditDetailsResolve}
       },
     ])
   ],

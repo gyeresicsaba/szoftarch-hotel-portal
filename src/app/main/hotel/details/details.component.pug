@@ -38,14 +38,11 @@ div.wrapper.wrapper-content.ecommerce
                 th.text-center Szobaszám
                 th.text-center Férőhelyek
                 th.text-center Ár
-                th.text-center Szabad
             tbody
               tr(*ngFor="let room of hotel.rooms")
                 td.text-center {{ room.id }}.
                 td.text-center {{ room.capacity }} Fő
                 td.text-center {{ room.price }} Ft/éj/fő
-                td.text-center([ngClass]="{'text-primary': !room.isReserved, 'text-danger': room.isReserved}")
-                  i.fa([ngClass]="{'fa-check': !room.isReserved, 'fa-times': room.isReserved}")
                 td.text-right
                   i.fa.fa-eye([routerLink]="'rooms/' + room.id")
                   i.fa.fa-pencil([routerLink]="'rooms/' + room.id + '/edit'")

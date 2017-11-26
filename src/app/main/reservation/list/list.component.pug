@@ -2,7 +2,7 @@ div.wrapper.wrapper-content.ecommerce
   div.ibox-content.m-b-sm.border-bottom
     div.row
       div.col-xs-2.col-xs-offset-10
-        a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'/hotel/add'") Új foglalás
+        a.btn.btn-block.btn-w-m.btn-primary([routerLink]="'/reservation/add'") Új foglalás
     hr
     div.row
       div.col-lg-12
@@ -17,9 +17,9 @@ div.wrapper.wrapper-content.ecommerce
             tr(*ngFor="let reservation of response")
               td.text-center {{ reservation.roomId }}
               td.text-center {{ reservation.numberOfPeople }}
-              td.text-center {{ reservation.checkIn }}
-              td.text-center {{ reservation.checkOut }}
+              td.text-center {{ reservation.FormattedCheckIn }}
+              td.text-center {{ reservation.FormattedCheckOut }}
               td.text-right
-                i.fa.fa-eye([routerLink]="['../', hotel.id]")
-                i.fa.fa-pencil([routerLink]="'../' + hotel.id + '/edit'")
-                i.fa.fa-trash((click)="openDeleteModal(hotel)")
+                i.fa.fa-eye([routerLink]="['../', reservation.id]")
+                i.fa.fa-pencil([routerLink]="'../' + reservation.id + '/edit'")
+                i.fa.fa-trash((click)="openDeleteModal(reservation)")

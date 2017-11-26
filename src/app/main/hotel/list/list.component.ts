@@ -5,10 +5,10 @@ import {ModalService} from '../../../services/modal.service';
 import {Modal} from '../../../models/modal';
 import {CustomAuthHttpService} from '../../../services/custom-auth-http.service';
 import {FormControl} from '@angular/forms';
-import * as moment from 'moment';
 import {SearchObject} from '../../../models/searchObject';
 import {IMyOptions} from 'mydatepicker';
 import {PickedDate} from '../../../models/picked-date';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-list',
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
   };
 
   constructor(private route: ActivatedRoute, private modalService: ModalService,
-              private authHttp: CustomAuthHttpService) {
+              private authHttp: CustomAuthHttpService, private authService: AuthService) {
   }
 
   ngOnInit() {

@@ -6,8 +6,6 @@ nav.navbar-default.navbar-static-side(role="navigation")
           a.dropdown-toggle(data-toggle="dropdown", aria-expanded="true")
             span.block.m-t-xs
               strong.font-bold([routerLink]="'/profile'") {{ user?.name }}
-              //span.text-muted.text-xs.block Beállítások
-                b.caret
           ul.dropdown-menu.m-t-xs.animated.fadeInRight
             li
               a Logout

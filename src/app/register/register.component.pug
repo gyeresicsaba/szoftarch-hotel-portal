@@ -3,11 +3,11 @@ div.middle-box.text-center.loginscreen
     div.logo-container
       img.logo(src="assets/images/logo.png")
     h4 Hotel portál
-    form.m-t(role="form", #loginForm="ngForm", (ngSubmit)="onSubmit()", [ngClass]="{'has-error': (loginForm.submitted && loginError)}")
+    form.m-t(role="form", #loginForm="ngForm", (ngSubmit)="onSubmit()", [ngClass]="{'has-error': (loginForm.submitted && registerError)}")
       div.form-group
         input#username.form-control(type="username", placeholder="Felhasználónév", name="username", [(ngModel)]="credentials.username", #username="ngModel", required, autofocus)
       div.form-group
         input#password.form-control(type="password", placeholder="Jelszó", name="password", [(ngModel)]="credentials.password", #password="ngModel", required)
-      p.help-block(*ngIf="loginForm.submitted && loginError")
-        span A megadott felhasználónév vagy jelszó helytelen!
-      button.btn.btn-primary.block.full-width.m-b(type="submit", [disabled]="loginForm.invalid") Bejelentkezés
+      p.help-block(*ngIf="loginForm.submitted && registerError")
+        span Már létezik ilyen felhasználónév, kérem válasszon másikat!
+      button.btn.btn-primary.block.full-width.m-b(type="submit", [disabled]="loginForm.invalid") Regisztráció

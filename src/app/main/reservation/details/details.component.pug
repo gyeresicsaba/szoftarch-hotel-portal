@@ -3,14 +3,17 @@ div.wrapper.wrapper-content.ecommerce
     div.row.vertical-align
       div.col-xs-10
         h2
-          strong {{ room.id }}.szoba
+          strong {{ reservation.id }}.foglalás
           i([routerLink]="'edit'").fa.fa-pencil
           i.fa.fa-trash((click)="openDeleteModal()")
     hr
     div.row
       div.col-xs-4
         h3 Férőhelyek száma:
-        div {{ room.capacity }}
+        div {{ reservation.numberOfPeople }}
       div.col-xs-4
-        h3 Ár:
-        div {{ room.price }} Ft/éj/fő
+        h3 Kezdő dátum:
+        div {{ reservation.FormattedCheckIn }}
+      div.col-xs-4
+        h3 Végső dátum:
+        div {{ reservation.FormattedCheckOut }}

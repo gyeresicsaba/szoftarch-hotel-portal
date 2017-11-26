@@ -4,7 +4,7 @@ export class User implements ITypeAheadElement {
   id: string;
   email: string;
   name: string;
-  modules: Array<{ [name: string]: string[] }>;
+  modules: { [name: string]: string[] };
 
   constructor(raw) {
     this.id = raw.id;
@@ -14,7 +14,11 @@ export class User implements ITypeAheadElement {
   }
 
   get IsAdmin(): boolean {
-    return this.modules.hasOwnProperty('partner') || this.modules.hasOwnProperty('service');
+    if (this.modules.room.indexOf('delete') !== -1) {
+      return true
+    } else {
+      return false;
+    }
   }
 
   get DisplayValue() {

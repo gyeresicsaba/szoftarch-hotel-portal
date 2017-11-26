@@ -10,7 +10,7 @@ import {environment} from '../../environments/environment';
 })
 export class RegisterComponent implements OnInit {
   credentials = {username: '', password: ''};
-  loginError: boolean;
+  registerError: boolean;
 
   constructor(private http: Http, private router: Router) {
   }
@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl('');
       },
       () => {
-        this.loginError = true;
+        this.registerError = true;
       }
     );
   }

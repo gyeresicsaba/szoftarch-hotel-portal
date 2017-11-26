@@ -42,5 +42,5 @@ div.wrapper.wrapper-content.ecommerce
                   i.fa.fa-star.hotel-star(*ngFor="let item of fillArray(hotel.numberOfStars)")
                 td.text-right
                   i.fa.fa-eye([routerLink]="['../', hotel.id]")
-                  i.fa.fa-pencil([routerLink]="'../' + hotel.id + '/edit'")
-                  i.fa.fa-trash((click)="openDeleteModal(hotel)")
+                  i.fa.fa-pencil(*ngIf="authService.user.IsAdmin", [routerLink]="'../' + hotel.id + '/edit'")
+                  i.fa.fa-trash(*ngIf="authService.user.IsAdmin", (click)="openDeleteModal(hotel)")
